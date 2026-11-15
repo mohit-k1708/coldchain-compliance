@@ -94,6 +94,7 @@ export function readRoutes(db) {
       route_stops: all(db, 'SELECT * FROM route_stop WHERE shipment_id = ? ORDER BY COALESCE(stop_sequence, 1000000), actual_arrival', sid),
       custody_events: all(db, 'SELECT * FROM custody_event WHERE shipment_id = ? ORDER BY event_sequence', sid),
       compliance_run: run ? { ...run, is_current: run.is_current === 1 } : null,
+      runs: all(db, 'SELECT compliance_run_id, compliance_status, reason_summary, run_at, is_current, policy_id, input_fingerprint FROM compliance_run WHERE shipment_id = ? ORDER BY run_at, compliance_run_id', sid).map((x) => ({ ...x, is_current: x.is_current === 1 })),
       findings, exceptions,
       legacy_excursion_reports: all(db, "SELECT * FROM excursion_report WHERE shipment_id = ? AND source = 'LEGACY_IMPORT' ORDER BY excursion_id", sid),
       legacy_reports: all(db, 'SELECT * FROM legacy_report WHERE shipment_id = ?', sid),
@@ -154,7 +155,7 @@ export function readRoutes(db) {
     if (q.shipmentId !== undefined && q.shipmentId !== '') { where.push('shipment_id = ?'); p.push(String(q.shipmentId)); }
     const w = `WHERE ${where.join(' AND ')}`;
     const total = get(db, `SELECT count(*) n FROM excursion_report ${w}`, ...p).n;
-    const items = all(db, `SELECT * FROM excursion_report ${w} ORDER BY excursion_id LIMIT ? OFFSET ?`, ...p, pageSize, offset);
+    const items = all(db, `SELECT e.*, (SELECT count(*) FROM excursion_evidence x WHERE x.excursion_id = e.excursion_id) AS evidence_count FROM excursion_report e ${w} ORDER BY excursion_id LIMIT ? OFFSET ?`, ...p, pageSize, offset);
     res.json({ items, total, page, pageSize });
   }));
 

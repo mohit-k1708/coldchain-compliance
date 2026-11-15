@@ -14,6 +14,7 @@ import { run as runEngine } from '../engine/cli.js';
 import { computeAll, joinRows, pct, fmt } from './metrics.js';
 import { naiveEvaluate } from './naiveBaseline.js';
 import { naiveRows, runAblation, renderReport } from './report.js';
+import { confusionMatrix, classMetrics, accuracy, macroF1 } from './metrics.js';
 
 export function readTruth(file) {
   const [h, ...rows] = parseCsv(readFileSync(file, 'utf8')).filter((r) => r.length > 1);
@@ -77,8 +78,11 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   };
   mkdirSync(dirname(resolve(outFile)), { recursive: true });
   writeFileSync(resolve(outFile), renderReport(rep), 'utf8');
-  const strip = (m) => m; // metrics are already plain data
-  writeFileSync(resolve(outFile.replace(/\.md$/, '') + '.json'), JSON.stringify({ primary: { ...rep.primary, metrics: strip(rep.primary.metrics), naive: undefined }, ablation: rep.ablation, oracle: rep.oracle,
-    holdout: holdout ? { ...holdout, naive: undefined } : null }, null, 2) + '\n', 'utf8');
+  const naiveSummary = (n) => { if (!n) return undefined; const cm = confusionMatrix(n.rows.map((r) => ({ expected: r.expected_decision, actual: r.actual_status }))); const per = {};
+    for (const r of n.rows) { const o = (per[r.label] ??= { count: 0, correct: 0 }); o.count++; if (r.actual_status === r.expected_decision) o.correct++; }
+    return { confusion: cm, accuracy: accuracy(cm), macro_f1: macroF1(classMetrics(cm)), per_label: per }; };
+  const limitations = renderReport(rep).split('## Limitations')[1]?.split(String.fromCharCode(10)).filter((l) => l.startsWith('- ')).map((l) => l.slice(2)) ?? [];
+  writeFileSync(resolve(outFile.replace(/\.md$/, '') + '.json'), JSON.stringify({ primary: { ...rep.primary, metrics: rep.primary.metrics, naive: naiveSummary(rep.primary.naive) }, ablation: rep.ablation, oracle: rep.oracle, limitations,
+    holdout: holdout ? { ...holdout, naive: naiveSummary(holdout.naive) } : null }, null, 2) + '\n', 'utf8');
   console.log(`wrote ${outFile} in ${Math.round(performance.now() - t0)} ms`);
 }

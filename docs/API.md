@@ -38,10 +38,11 @@ The `x-role` header selects a role (default `analyst`; unknown value -> 400). Re
 | `GET /api/health` | `{ok, db:{shipment, temperature_reading, compliance_run}}` |
 | `GET /api/dashboard` | totals, compliant / non_compliant / indeterminate, open exceptions, exceptions by status and severity, excursion runs, data gaps, counts by issue type, top reasons, per-product status breakdown |
 | `GET /api/shipments?page&pageSize&status&shipmentStatus&productId&q&sort` | `{items,total,page,pageSize}`; `status` = compliance status, `q` = shipment id prefix, `sort` = `id`, `-id`, `departure`, `-departure`, `status`, `-status` |
-| `GET /api/shipments/:id` | shipment, product, lots, packaging, applied policy and policy used, logger assignments with logger and calibrations, status history, route, custody, current run with findings (evidence ids capped at 50 + count), engine exceptions with history, legacy reports |
+| `GET /api/shipments/:id` | shipment, product, lots, packaging, applied policy and policy used, `runs` (all runs, current flagged), logger assignments with logger and calibrations, status history, route, custody, current run with findings (evidence ids capped at 50 + count), engine exceptions with history, legacy reports |
 | `GET /api/shipments/:id/readings` | window readings with IN/OUT/MARGINAL, policy limits, class counts, excursion and gap periods (for charts) |
 | `GET /api/shipments/:id/report?format=json\|md\|html` | the engine's traceable report (`engine/report.js`), built from a one-shipment slice of the DB (`server/loadSlice.js`) |
-| `GET /api/exceptions?status&severity&issueType&shipmentId&source&page&pageSize` | engine exceptions by default (`source=ENGINE`) |
+| `GET /api/evaluation` | contents of `docs/EVALUATION-REPORT.json` (primary + holdout metrics, ablation, naive summary, limitations); 404 JSON if the file is missing |
+| `GET /api/exceptions?status&severity&issueType&shipmentId&source&page&pageSize` | engine exceptions by default (`source=ENGINE`) (rows include `evidence_count`) |
 | `GET /api/exceptions/:id` | exception, history, evidence readings |
 
 ## Write endpoints (all in one transaction each)
@@ -55,3 +56,6 @@ The `x-role` header selects a role (default `analyst`; unknown value -> 400). Re
 | `POST /api/readings/batch` | carrier | `{readings:[...]}` -> `{accepted, duplicates, rejected:[{index,reason}]}`. Validates grid, range, quality, logger, ids; `INSERT OR IGNORE` on reading id and (logger, recorded_at); a bad row never aborts the batch; re-posting changes nothing. Without `logger_assignment_id` the covering assignment is linked automatically |
 | `POST /api/shipments/:id/evaluate` | analyst | runs the engine for one DELIVERED shipment. Same inputs -> same run (idempotent by fingerprint, `created:false`); changed inputs (for example a late reading) -> a NEW run, the old run is kept with `is_current=false`. Engine exceptions go through `reconcileExceptions` (no duplicates). Default as-of = max(last run's as-of, arrival, latest `received_at` inside the transit); `asOf` can be passed explicitly |
 | `POST /api/exceptions/:id/transition` | analyst / manager | `{event_id, to_status, analyst?, note?, resolution?, occurred_at?}`; same `event_id` again -> 200 with no new history row; illegal transition 409; missing field 400 |
+
+## Serving the UI
+If `client/dist` exists (`npm run client:build`), `npm start` also serves it statically and returns `index.html` for every non-`/api` GET (SPA fallback). Unknown `/api/*` paths always return the JSON 404.

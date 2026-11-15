@@ -369,6 +369,81 @@
           "mae": 0
         }
       }
+    },
+    "naive": {
+      "confusion": {
+        "COMPLIANT": {
+          "COMPLIANT": 3750,
+          "NON_COMPLIANT": 50,
+          "INDETERMINATE": 0
+        },
+        "NON_COMPLIANT": {
+          "COMPLIANT": 100,
+          "NON_COMPLIANT": 400,
+          "INDETERMINATE": 0
+        },
+        "INDETERMINATE": {
+          "COMPLIANT": 678,
+          "NON_COMPLIANT": 22,
+          "INDETERMINATE": 0
+        }
+      },
+      "accuracy": 0.83,
+      "macro_f1": 0.8618108181828963,
+      "per_label": {
+        "NONE": {
+          "count": 3400,
+          "correct": 3400
+        },
+        "TEMPERATURE_EXCURSION": {
+          "count": 400,
+          "correct": 400
+        },
+        "EXCURSION_WITHIN_ALLOWANCE": {
+          "count": 250,
+          "correct": 250
+        },
+        "MISSING_DATA": {
+          "count": 150,
+          "correct": 0
+        },
+        "ROUTE_DEVIATION": {
+          "count": 100,
+          "correct": 0
+        },
+        "BOUNDARY_AT_LIMIT": {
+          "count": 100,
+          "correct": 100
+        },
+        "CROSS_SHIPMENT_EXCURSION": {
+          "count": 50,
+          "correct": 0
+        },
+        "CUSTODY_GAP": {
+          "count": 100,
+          "correct": 0
+        },
+        "POLICY_MISMATCH": {
+          "count": 100,
+          "correct": 0
+        },
+        "CALIBRATION_MARGINAL": {
+          "count": 100,
+          "correct": 0
+        },
+        "MISSING_DATA_SILENTLY_PASSED": {
+          "count": 100,
+          "correct": 0
+        },
+        "LOGGER_NOT_ASSIGNED": {
+          "count": 100,
+          "correct": 0
+        },
+        "CALIBRATION_EXPIRED": {
+          "count": 50,
+          "correct": 0
+        }
+      }
     }
   },
   "ablation": [
@@ -560,6 +635,13 @@
     }
   ],
   "oracle": "`tests/property/excursion.property.test.js`: 2,000 seeded random cases (2-60 readings, random omissions and long gaps, random limits, uncertainty 0-0.6) compared against an oracle that marks 1-minute cells instead of segmenting runs, plus a minute-by-minute brute-force gap scan. Result: PASS (1 tests passed, 0 failed).",
+  "limitations": [
+    "The ground-truth labels are produced by injectors written from the same documented rules (`docs/BUSINESS-RULES.md`) that the engine implements. High scores therefore demonstrate **rule faithfulness** (the engine does what the documented rules say), not accuracy on real cold-chain data.",
+    "The injectors create one anomaly per shipment, so interactions between anomalies (for example a temperature excursion on a shipment that also has a custody gap) are not exercised.",
+    "Assumptions A-01..A-10 in the business rules are our own interpretations of an ambiguous statement; they are **not** Yotta's official definitions and a different reading would change both the labels and the expected decisions.",
+    "Logger streams, delays, dwell times and temperature noise are synthetic (AR(1) around the range midpoint); real sensors have drift, spikes and clock errors that are not modelled.",
+    "The naive baseline is a straw man built to show the mandatory failure modes; it is not a model of any real vendor system."
+  ],
   "holdout": {
     "name": "seed 777 holdout (different seed and label mix)",
     "description": "seed 777, 2000 shipments, 400 loggers, mix `holdout`, generator 0.0.0.",
@@ -928,6 +1010,81 @@
           "exact": 140,
           "exact_rate": 1,
           "mae": 0
+        }
+      }
+    },
+    "naive": {
+      "confusion": {
+        "COMPLIANT": {
+          "COMPLIANT": 1180,
+          "NON_COMPLIANT": 40,
+          "INDETERMINATE": 0
+        },
+        "NON_COMPLIANT": {
+          "COMPLIANT": 80,
+          "NON_COMPLIANT": 240,
+          "INDETERMINATE": 0
+        },
+        "INDETERMINATE": {
+          "COMPLIANT": 446,
+          "NON_COMPLIANT": 14,
+          "INDETERMINATE": 0
+        }
+      },
+      "accuracy": 0.71,
+      "macro_f1": 0.7941604084240808,
+      "per_label": {
+        "NONE": {
+          "count": 960,
+          "correct": 960
+        },
+        "TEMPERATURE_EXCURSION": {
+          "count": 240,
+          "correct": 240
+        },
+        "ROUTE_DEVIATION": {
+          "count": 80,
+          "correct": 0
+        },
+        "CROSS_SHIPMENT_EXCURSION": {
+          "count": 40,
+          "correct": 0
+        },
+        "EXCURSION_WITHIN_ALLOWANCE": {
+          "count": 160,
+          "correct": 160
+        },
+        "CUSTODY_GAP": {
+          "count": 60,
+          "correct": 0
+        },
+        "CALIBRATION_EXPIRED": {
+          "count": 40,
+          "correct": 0
+        },
+        "BOUNDARY_AT_LIMIT": {
+          "count": 60,
+          "correct": 60
+        },
+        "MISSING_DATA": {
+          "count": 80,
+          "correct": 0
+        },
+        "MISSING_DATA_SILENTLY_PASSED": {
+          "count": 60,
+          "correct": 0
+        },
+        "POLICY_MISMATCH": {
+          "count": 60,
+          "correct": 0
+        },
+        "CALIBRATION_MARGINAL": {
+          "count": 80,
+          "correct": 0
+        },
+        "LOGGER_NOT_ASSIGNED": {
+          "count": 80,
+          "correct": 0
         }
       }
     },

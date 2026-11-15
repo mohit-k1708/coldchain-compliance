@@ -19,7 +19,10 @@
     "report:examples": "node scripts/reportExamples.js",
     "db:build": "node server/build.js",
     "start": "node server/index.js",
-    "bench:api": "node scripts/apiBench.js"
+    "bench:api": "node scripts/apiBench.js",
+    "client:install": "npm --prefix client install",
+    "client:dev": "npm --prefix client run dev",
+    "client:build": "npm --prefix client run build"
   },
   "dependencies": {
     "express": "^5.3.0"
