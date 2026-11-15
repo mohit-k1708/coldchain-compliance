@@ -69,7 +69,7 @@ export function generateMasterData(rng, { loggers }) {
   const threshold_policy = [];
   product.forEach((p, i) => {
     const base = { product_id: p.product_id, min_temp_c: p.required_min_temp_c, max_temp_c: p.required_max_temp_c,
-      max_excursion_minutes: p.max_excursion_minutes, max_data_gap_minutes: 30, sampling_interval_minutes: 10 };
+      max_excursion_minutes: p.max_excursion_minutes, max_data_gap_minutes: 20, sampling_interval_minutes: 10 };
     threshold_policy.push({ policy_id: ids.policyId(2 * i + 1), ...base, policy_version: 1, max_dwell_minutes: 120,
       effective_from: T0, effective_to: '2026-09-01T00:00:00Z', policy_status: 'SUPERSEDED' });
     threshold_policy.push({ policy_id: ids.policyId(2 * i + 2), ...base, policy_version: 2, max_dwell_minutes: 90,

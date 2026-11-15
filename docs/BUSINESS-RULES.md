@@ -127,7 +127,7 @@ A run is never extended across a data gap: it ends at `last OUT time + sampling_
 If `confirmed_out_minutes <= max` but `possible_out_minutes > max` -> INDETERMINATE (issue `CALIBRATION_MARGINAL`).
 
 ### Missing data
-**R-GAP-01 (A-04).** Expected sampling interval comes from the policy (default 10 min). A gap exists when two consecutive valid readings, or a window boundary and the nearest valid reading, are more than `max_data_gap_minutes` apart (default **30 min**). Gap minutes are never assumed in-range.
+**R-GAP-01 (A-04).** Expected sampling interval comes from the policy (default 10 min). A gap exists when two consecutive valid readings, or a window boundary and the nearest valid reading, are more than `max_data_gap_minutes` apart (default **20 min**; the statement example 10:00, 10:10, 10:40 is therefore a gap). Gap minutes are never assumed in-range.
 Any gap -> INDETERMINATE (`MISSING_DATA`) unless NON_COMPLIANT already applies. Short jitter (< `max_data_gap_minutes`) is tolerated and reported as a coverage statistic only.
 
 ### Logger
@@ -210,7 +210,7 @@ Labels are produced by the injector from the *injection it performed*, not by ca
 | A-02 | Excursion duration | Sample-and-hold, first OUT to next non-OUT |
 | A-02b | Multiple excursions | Individual records, cumulative total vs allowance |
 | A-03 | Boundaries / uncertainty | At limit with u=0 is IN; +/-u band gives MARGINAL -> INDETERMINATE |
-| A-04 | Acceptable gap | Policy `max_data_gap_minutes`, default 30 |
+| A-04 | Acceptable gap | Policy `max_data_gap_minutes`, default 20 |
 | A-05 | Route deviation | Missing/unexpected stop, wrong order, excess dwell |
 | A-06 | Custody gap | Broken or incomplete chain of PICKUP/HANDOVER/DELIVERY |
 | A-07 | Packaging compatibility | Range containment + duration; WARNING only |
