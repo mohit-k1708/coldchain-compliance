@@ -1,0 +1,10 @@
+{
+  "name": "coldchain-compliance",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "generate": "node -e \"console.log('not implemented')\"",
+    "validate": "node -e \"console.log('not implemented')\""
+  }
+}
