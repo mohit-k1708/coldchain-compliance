@@ -12,6 +12,8 @@
     "export:sql": "node scripts/export.js --format=sql",
     "export:json": "node scripts/export.js --format=json",
     "perf": "node scripts/perf.js",
-    "full:manifest": "node scripts/full.js"
+    "full:manifest": "node scripts/full.js",
+    "metrics": "node evaluation/cli.js",
+    "export:full": "node scripts/full.js"
   }
 }

@@ -14,10 +14,11 @@ function canonical(v) {
 }
 
 // Pure evaluation of one shipment: returns an un-numbered draft (no run/finding IDs yet).
-export function evaluateShipment(idx, shipment, { asOf = DEFAULT_AS_OF } = {}) {
+export function evaluateShipment(idx, shipment, { asOf = DEFAULT_AS_OF, disabledRules = [] } = {}) {
   const asOfMs = ms(asOf);
-  const res = calculateShipmentCompliance(idx, shipment, { asOfMs });
-  const fingerprint = createHash('sha256').update(canonical({ inputs: res.inputs, engine_version: ENGINE_VERSION, as_of: asOf })).digest('hex');
+  const res = calculateShipmentCompliance(idx, shipment, { asOfMs, disabledRules });
+  const fp = { inputs: res.inputs, engine_version: ENGINE_VERSION, as_of: asOf, ...(disabledRules.length ? { disabled_rules: [...disabledRules].sort() } : {}) };
+  const fingerprint = createHash('sha256').update(canonical(fp)).digest('hex');
   return { shipment, asOf, fingerprint, ...res };
 }
 
@@ -59,7 +60,8 @@ const numOf = (id) => Number(String(id).match(/(\d+)$/)?.[1] ?? 0);
 
 // ds: plain table object. options: { asOf, existing } where existing = a previous evaluateAll result.
 // Re-running with identical inputs adds nothing; changed inputs add a NEW run and supersede (never overwrite) the old one.
-export function evaluateAll(ds, { asOf = DEFAULT_AS_OF, existing = null, readingStore = null } = {}) {
+// options.disabledRules: evaluation/ablation hook (see compliance.js). Default [] = normal behaviour.
+export function evaluateAll(ds, { asOf = DEFAULT_AS_OF, existing = null, readingStore = null, disabledRules = [] } = {}) {
   const idx = buildIndexes(ds, { readingStore });
   const out = { runs: [], findings: [], evidence: [], excursions: [], excursionEvidence: [], supersededRunIds: [] };
   const known = new Map((existing?.runs ?? []).map((r) => [`${r.shipment_id}|${r.input_fingerprint}`, r]));
@@ -69,7 +71,7 @@ export function evaluateAll(ds, { asOf = DEFAULT_AS_OF, existing = null, reading
   let excNo = Math.max(0, ...(ds.excursion_report ?? []).map((x) => numOf(x.excursion_id)), ...(existing?.excursions ?? []).map((x) => numOf(x.excursion_id))) + 1;
   const shipments = idx.shipments.filter((s) => s.shipment_status === 'DELIVERED').sort((a, b) => (a.shipment_id < b.shipment_id ? -1 : 1));
   for (const s of shipments) {
-    const draft = evaluateShipment(idx, s, { asOf });
+    const draft = evaluateShipment(idx, s, { asOf, disabledRules });
     if (known.has(`${s.shipment_id}|${draft.fingerprint}`)) continue;
     const m = materialize(draft, runNo++, excNo);
     excNo = m.nextExcNo;

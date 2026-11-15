@@ -1,0 +1,936 @@
+{
+  "primary": {
+    "name": "seed 20261022, 5000 shipments",
+    "description": "seed 20261022, 5000 shipments, 1000 loggers, mix `default`, generator 0.0.0.",
+    "metrics": {
+      "n": 5000,
+      "confusion": {
+        "COMPLIANT": {
+          "COMPLIANT": 3800,
+          "NON_COMPLIANT": 0,
+          "INDETERMINATE": 0
+        },
+        "NON_COMPLIANT": {
+          "COMPLIANT": 0,
+          "NON_COMPLIANT": 500,
+          "INDETERMINATE": 0
+        },
+        "INDETERMINATE": {
+          "COMPLIANT": 0,
+          "NON_COMPLIANT": 0,
+          "INDETERMINATE": 700
+        }
+      },
+      "accuracy": 1,
+      "classes": {
+        "COMPLIANT": {
+          "tp": 3800,
+          "fp": 0,
+          "fn": 0,
+          "support": 3800,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "NON_COMPLIANT": {
+          "tp": 500,
+          "fp": 0,
+          "fn": 0,
+          "support": 500,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "INDETERMINATE": {
+          "tp": 700,
+          "fp": 0,
+          "fn": 0,
+          "support": 700,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        }
+      },
+      "macro_f1": 1,
+      "per_label": {
+        "NONE": {
+          "count": 3400,
+          "detected": 3400,
+          "correct_status": 3400,
+          "row": {
+            "COMPLIANT": 3400,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 0
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "TEMPERATURE_EXCURSION": {
+          "count": 400,
+          "detected": 400,
+          "correct_status": 400,
+          "row": {
+            "COMPLIANT": 0,
+            "NON_COMPLIANT": 400,
+            "INDETERMINATE": 0
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "EXCURSION_WITHIN_ALLOWANCE": {
+          "count": 250,
+          "detected": 250,
+          "correct_status": 250,
+          "row": {
+            "COMPLIANT": 250,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 0
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "MISSING_DATA": {
+          "count": 150,
+          "detected": 150,
+          "correct_status": 150,
+          "row": {
+            "COMPLIANT": 0,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 150
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "ROUTE_DEVIATION": {
+          "count": 100,
+          "detected": 100,
+          "correct_status": 100,
+          "row": {
+            "COMPLIANT": 0,
+            "NON_COMPLIANT": 100,
+            "INDETERMINATE": 0
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "BOUNDARY_AT_LIMIT": {
+          "count": 100,
+          "detected": 100,
+          "correct_status": 100,
+          "row": {
+            "COMPLIANT": 100,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 0
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "CROSS_SHIPMENT_EXCURSION": {
+          "count": 50,
+          "detected": 50,
+          "correct_status": 50,
+          "row": {
+            "COMPLIANT": 50,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 0
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "CUSTODY_GAP": {
+          "count": 100,
+          "detected": 100,
+          "correct_status": 100,
+          "row": {
+            "COMPLIANT": 0,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 100
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "POLICY_MISMATCH": {
+          "count": 100,
+          "detected": 100,
+          "correct_status": 100,
+          "row": {
+            "COMPLIANT": 0,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 100
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "CALIBRATION_MARGINAL": {
+          "count": 100,
+          "detected": 100,
+          "correct_status": 100,
+          "row": {
+            "COMPLIANT": 0,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 100
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "MISSING_DATA_SILENTLY_PASSED": {
+          "count": 100,
+          "detected": 100,
+          "correct_status": 100,
+          "row": {
+            "COMPLIANT": 0,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 100
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "LOGGER_NOT_ASSIGNED": {
+          "count": 100,
+          "detected": 100,
+          "correct_status": 100,
+          "row": {
+            "COMPLIANT": 0,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 100
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "CALIBRATION_EXPIRED": {
+          "count": 50,
+          "detected": 50,
+          "correct_status": 50,
+          "row": {
+            "COMPLIANT": 0,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 50
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        }
+      },
+      "rules": {
+        "R-TEMP-03": {
+          "fired": 400,
+          "expected": 400,
+          "tp": 400,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-TEMP-04": {
+          "fired": 100,
+          "expected": 100,
+          "tp": 100,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-GAP-01": {
+          "fired": 350,
+          "expected": 250,
+          "tp": 250,
+          "precision": 0.7142857142857143,
+          "recall": 1,
+          "f1": 0.8333333333333333
+        },
+        "R-LOG-02": {
+          "fired": 100,
+          "expected": 100,
+          "tp": 100,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-LOG-03": {
+          "fired": 50,
+          "expected": 50,
+          "tp": 50,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-POL-01": {
+          "fired": 100,
+          "expected": 100,
+          "tp": 100,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-CUS-01": {
+          "fired": 100,
+          "expected": 100,
+          "tp": 100,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-ROUTE-01": {
+          "fired": 21,
+          "expected": 21,
+          "tp": 21,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-ROUTE-02": {
+          "fired": 30,
+          "expected": 30,
+          "tp": 30,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-ROUTE-03": {
+          "fired": 9,
+          "expected": 9,
+          "tp": 9,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-ROUTE-04": {
+          "fired": 40,
+          "expected": 40,
+          "tp": 40,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-ROUTE": {
+          "fired": 100,
+          "expected": 100,
+          "tp": 100,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        }
+      },
+      "named_rates": {
+        "false_positive_rate": {
+          "num": 0,
+          "den": 3800,
+          "rate": 0
+        },
+        "missed_excursion_rate": {
+          "num": 0,
+          "den": 400,
+          "rate": 0
+        },
+        "missing_data_detection_rate": {
+          "num": 250,
+          "den": 250,
+          "rate": 1
+        },
+        "silent_pass_detection_rate": {
+          "num": 100,
+          "den": 100,
+          "rate": 1
+        },
+        "custody_gap_detection_rate": {
+          "num": 100,
+          "den": 100,
+          "rate": 1
+        },
+        "logger_mismatch_detection_rate": {
+          "num": 150,
+          "den": 150,
+          "rate": 1
+        },
+        "policy_mismatch_detection_rate": {
+          "num": 100,
+          "den": 100,
+          "rate": 1
+        },
+        "cross_shipment_isolation_rate": {
+          "num": 25,
+          "den": 25,
+          "rate": 1
+        },
+        "route_deviation_detection_rate": {
+          "num": 100,
+          "den": 100,
+          "rate": 1
+        }
+      },
+      "duration": {
+        "excursion_minutes": {
+          "n": 650,
+          "exact": 650,
+          "exact_rate": 1,
+          "mae": 0
+        },
+        "gap_minutes": {
+          "n": 250,
+          "exact": 250,
+          "exact_rate": 1,
+          "mae": 0
+        }
+      }
+    }
+  },
+  "ablation": [
+    {
+      "rule": "R-TEMP-03",
+      "accuracy": 0.92,
+      "accuracy_delta": -0.07999999999999996,
+      "macro_f1": 0.7611111111111111,
+      "changes": [
+        {
+          "label": "TEMPERATURE_EXCURSION",
+          "from": 1,
+          "to": 0
+        }
+      ],
+      "intended": [
+        "TEMPERATURE_EXCURSION"
+      ],
+      "hits_intended": true,
+      "changes_nothing": false
+    },
+    {
+      "rule": "R-TEMP-04",
+      "accuracy": 0.98,
+      "accuracy_delta": -0.020000000000000018,
+      "macro_f1": 0.9700299700299699,
+      "changes": [
+        {
+          "label": "CALIBRATION_MARGINAL",
+          "from": 1,
+          "to": 0
+        }
+      ],
+      "intended": [
+        "CALIBRATION_MARGINAL"
+      ],
+      "hits_intended": true,
+      "changes_nothing": false
+    },
+    {
+      "rule": "R-GAP-01",
+      "accuracy": 0.95,
+      "accuracy_delta": -0.050000000000000044,
+      "macro_f1": 0.9169205206314041,
+      "changes": [
+        {
+          "label": "MISSING_DATA",
+          "from": 1,
+          "to": 0
+        },
+        {
+          "label": "MISSING_DATA_SILENTLY_PASSED",
+          "from": 1,
+          "to": 0
+        }
+      ],
+      "intended": [
+        "MISSING_DATA",
+        "MISSING_DATA_SILENTLY_PASSED"
+      ],
+      "hits_intended": true,
+      "changes_nothing": false
+    },
+    {
+      "rule": "R-LOG-02",
+      "accuracy": 1,
+      "accuracy_delta": 0,
+      "macro_f1": 1,
+      "changes": [
+        {
+          "label": "LOGGER_NOT_ASSIGNED",
+          "from": 1,
+          "to": 0
+        }
+      ],
+      "intended": [
+        "LOGGER_NOT_ASSIGNED"
+      ],
+      "hits_intended": true,
+      "changes_nothing": false
+    },
+    {
+      "rule": "R-LOG-03",
+      "accuracy": 0.99,
+      "accuracy_delta": -0.010000000000000009,
+      "macro_f1": 0.9854756717501815,
+      "changes": [
+        {
+          "label": "CALIBRATION_EXPIRED",
+          "from": 1,
+          "to": 0
+        }
+      ],
+      "intended": [
+        "CALIBRATION_EXPIRED"
+      ],
+      "hits_intended": true,
+      "changes_nothing": false
+    },
+    {
+      "rule": "R-POL-01",
+      "accuracy": 0.98,
+      "accuracy_delta": -0.020000000000000018,
+      "macro_f1": 0.9700299700299699,
+      "changes": [
+        {
+          "label": "POLICY_MISMATCH",
+          "from": 1,
+          "to": 0
+        }
+      ],
+      "intended": [
+        "POLICY_MISMATCH"
+      ],
+      "hits_intended": true,
+      "changes_nothing": false
+    },
+    {
+      "rule": "R-CUS-01",
+      "accuracy": 0.98,
+      "accuracy_delta": -0.020000000000000018,
+      "macro_f1": 0.9700299700299699,
+      "changes": [
+        {
+          "label": "CUSTODY_GAP",
+          "from": 1,
+          "to": 0
+        }
+      ],
+      "intended": [
+        "CUSTODY_GAP"
+      ],
+      "hits_intended": true,
+      "changes_nothing": false
+    },
+    {
+      "rule": "R-ROUTE",
+      "accuracy": 0.98,
+      "accuracy_delta": -0.020000000000000018,
+      "macro_f1": 0.9586339586339586,
+      "changes": [
+        {
+          "label": "ROUTE_DEVIATION",
+          "from": 1,
+          "to": 0
+        }
+      ],
+      "intended": [
+        "ROUTE_DEVIATION"
+      ],
+      "hits_intended": true,
+      "changes_nothing": false
+    },
+    {
+      "rule": "R-SILENT-01",
+      "accuracy": 1,
+      "accuracy_delta": 0,
+      "macro_f1": 1,
+      "changes": [
+        {
+          "label": "MISSING_DATA_SILENTLY_PASSED",
+          "from": 1,
+          "to": 0
+        }
+      ],
+      "intended": [
+        "MISSING_DATA_SILENTLY_PASSED"
+      ],
+      "hits_intended": true,
+      "changes_nothing": false
+    },
+    {
+      "rule": "R-ISO-01",
+      "accuracy": 1,
+      "accuracy_delta": 0,
+      "macro_f1": 1,
+      "changes": [
+        {
+          "label": "CROSS_SHIPMENT_EXCURSION",
+          "from": 1,
+          "to": 0
+        }
+      ],
+      "intended": [
+        "CROSS_SHIPMENT_EXCURSION"
+      ],
+      "hits_intended": true,
+      "changes_nothing": false
+    }
+  ],
+  "oracle": "`tests/property/excursion.property.test.js`: 2,000 seeded random cases (2-60 readings, random omissions and long gaps, random limits, uncertainty 0-0.6) compared against an oracle that marks 1-minute cells instead of segmenting runs, plus a minute-by-minute brute-force gap scan. Result: PASS (1 tests passed, 0 failed).",
+  "holdout": {
+    "name": "seed 777 holdout (different seed and label mix)",
+    "description": "seed 777, 2000 shipments, 400 loggers, mix `holdout`, generator 0.0.0.",
+    "metrics": {
+      "n": 2000,
+      "confusion": {
+        "COMPLIANT": {
+          "COMPLIANT": 1220,
+          "NON_COMPLIANT": 0,
+          "INDETERMINATE": 0
+        },
+        "NON_COMPLIANT": {
+          "COMPLIANT": 0,
+          "NON_COMPLIANT": 320,
+          "INDETERMINATE": 0
+        },
+        "INDETERMINATE": {
+          "COMPLIANT": 0,
+          "NON_COMPLIANT": 0,
+          "INDETERMINATE": 460
+        }
+      },
+      "accuracy": 1,
+      "classes": {
+        "COMPLIANT": {
+          "tp": 1220,
+          "fp": 0,
+          "fn": 0,
+          "support": 1220,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "NON_COMPLIANT": {
+          "tp": 320,
+          "fp": 0,
+          "fn": 0,
+          "support": 320,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "INDETERMINATE": {
+          "tp": 460,
+          "fp": 0,
+          "fn": 0,
+          "support": 460,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        }
+      },
+      "macro_f1": 1,
+      "per_label": {
+        "NONE": {
+          "count": 960,
+          "detected": 960,
+          "correct_status": 960,
+          "row": {
+            "COMPLIANT": 960,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 0
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "TEMPERATURE_EXCURSION": {
+          "count": 240,
+          "detected": 240,
+          "correct_status": 240,
+          "row": {
+            "COMPLIANT": 0,
+            "NON_COMPLIANT": 240,
+            "INDETERMINATE": 0
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "ROUTE_DEVIATION": {
+          "count": 80,
+          "detected": 80,
+          "correct_status": 80,
+          "row": {
+            "COMPLIANT": 0,
+            "NON_COMPLIANT": 80,
+            "INDETERMINATE": 0
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "CROSS_SHIPMENT_EXCURSION": {
+          "count": 40,
+          "detected": 40,
+          "correct_status": 40,
+          "row": {
+            "COMPLIANT": 40,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 0
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "EXCURSION_WITHIN_ALLOWANCE": {
+          "count": 160,
+          "detected": 160,
+          "correct_status": 160,
+          "row": {
+            "COMPLIANT": 160,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 0
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "CUSTODY_GAP": {
+          "count": 60,
+          "detected": 60,
+          "correct_status": 60,
+          "row": {
+            "COMPLIANT": 0,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 60
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "CALIBRATION_EXPIRED": {
+          "count": 40,
+          "detected": 40,
+          "correct_status": 40,
+          "row": {
+            "COMPLIANT": 0,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 40
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "BOUNDARY_AT_LIMIT": {
+          "count": 60,
+          "detected": 60,
+          "correct_status": 60,
+          "row": {
+            "COMPLIANT": 60,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 0
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "MISSING_DATA": {
+          "count": 80,
+          "detected": 80,
+          "correct_status": 80,
+          "row": {
+            "COMPLIANT": 0,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 80
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "MISSING_DATA_SILENTLY_PASSED": {
+          "count": 60,
+          "detected": 60,
+          "correct_status": 60,
+          "row": {
+            "COMPLIANT": 0,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 60
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "POLICY_MISMATCH": {
+          "count": 60,
+          "detected": 60,
+          "correct_status": 60,
+          "row": {
+            "COMPLIANT": 0,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 60
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "CALIBRATION_MARGINAL": {
+          "count": 80,
+          "detected": 80,
+          "correct_status": 80,
+          "row": {
+            "COMPLIANT": 0,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 80
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        },
+        "LOGGER_NOT_ASSIGNED": {
+          "count": 80,
+          "detected": 80,
+          "correct_status": 80,
+          "row": {
+            "COMPLIANT": 0,
+            "NON_COMPLIANT": 0,
+            "INDETERMINATE": 80
+          },
+          "detection_rate": 1,
+          "status_accuracy": 1
+        }
+      },
+      "rules": {
+        "R-TEMP-03": {
+          "fired": 240,
+          "expected": 240,
+          "tp": 240,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-TEMP-04": {
+          "fired": 80,
+          "expected": 80,
+          "tp": 80,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-GAP-01": {
+          "fired": 220,
+          "expected": 140,
+          "tp": 140,
+          "precision": 0.6363636363636364,
+          "recall": 1,
+          "f1": 0.7777777777777778
+        },
+        "R-LOG-02": {
+          "fired": 80,
+          "expected": 80,
+          "tp": 80,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-LOG-03": {
+          "fired": 40,
+          "expected": 40,
+          "tp": 40,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-POL-01": {
+          "fired": 60,
+          "expected": 60,
+          "tp": 60,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-CUS-01": {
+          "fired": 60,
+          "expected": 60,
+          "tp": 60,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-ROUTE-01": {
+          "fired": 18,
+          "expected": 18,
+          "tp": 18,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-ROUTE-02": {
+          "fired": 25,
+          "expected": 25,
+          "tp": 25,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-ROUTE-03": {
+          "fired": 8,
+          "expected": 8,
+          "tp": 8,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-ROUTE-04": {
+          "fired": 29,
+          "expected": 29,
+          "tp": 29,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "R-ROUTE": {
+          "fired": 80,
+          "expected": 80,
+          "tp": 80,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        }
+      },
+      "named_rates": {
+        "false_positive_rate": {
+          "num": 0,
+          "den": 1220,
+          "rate": 0
+        },
+        "missed_excursion_rate": {
+          "num": 0,
+          "den": 240,
+          "rate": 0
+        },
+        "missing_data_detection_rate": {
+          "num": 140,
+          "den": 140,
+          "rate": 1
+        },
+        "silent_pass_detection_rate": {
+          "num": 60,
+          "den": 60,
+          "rate": 1
+        },
+        "custody_gap_detection_rate": {
+          "num": 60,
+          "den": 60,
+          "rate": 1
+        },
+        "logger_mismatch_detection_rate": {
+          "num": 120,
+          "den": 120,
+          "rate": 1
+        },
+        "policy_mismatch_detection_rate": {
+          "num": 60,
+          "den": 60,
+          "rate": 1
+        },
+        "cross_shipment_isolation_rate": {
+          "num": 20,
+          "den": 20,
+          "rate": 1
+        },
+        "route_deviation_detection_rate": {
+          "num": 80,
+          "den": 80,
+          "rate": 1
+        }
+      },
+      "duration": {
+        "excursion_minutes": {
+          "n": 400,
+          "exact": 400,
+          "exact_rate": 1,
+          "mae": 0
+        },
+        "gap_minutes": {
+          "n": 140,
+          "exact": 140,
+          "exact_rate": 1,
+          "mae": 0
+        }
+      }
+    },
+    "disagreements": "None: the engine status equals the expected decision for every shipment."
+  }
+}

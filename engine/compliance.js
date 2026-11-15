@@ -38,7 +38,9 @@ function collectReadings(idx, assignments, depMs, arrMs, asOfMs) {
   return { used, nonGood, late };
 }
 
-export function calculateShipmentCompliance(idx, shipment, { asOfMs }) {
+// disabledRules is an EVALUATION HOOK (ablation studies): findings whose rule_code equals an entry, or starts with
+// '<entry>-' (so 'R-ROUTE' disables R-ROUTE-01..05), are dropped before precedence is applied. Default: none.
+export function calculateShipmentCompliance(idx, shipment, { asOfMs, disabledRules = [] }) {
   const findings = [];
   const push = (...fs) => { for (const f of fs) if (f) findings.push({ reading_ids: [], ...f }); };
   const depMs = ms(shipment.departure_time), arrMs = ms(shipment.arrival_time);
@@ -62,7 +64,7 @@ export function calculateShipmentCompliance(idx, shipment, { asOfMs }) {
 
   if (!policy) {
     push({ rule_code: 'R-POL-01', result: 'INDETERMINATE', detail: `no policy found for product ${shipment.product_id}`, detail_json: {}, issue_type: 'POLICY_MISMATCH' });
-    return finish({ findings, policy: null, shipment, correct, applied, assignments, loggers, used: [], inputs: { shipment }, excursions: [], asOfMs });
+    return finish({ findings, policy: null, shipment, correct, applied, assignments, loggers, used: [], inputs: { shipment }, excursions: [], asOfMs, disabledRules });
   }
 
   // logger / window
@@ -100,7 +102,7 @@ export function calculateShipmentCompliance(idx, shipment, { asOfMs }) {
     readings: used.map((r) => [r.reading_id, r.row.recorded_at, r.row.received_at, r.temperature_c, r.calibration_uncertainty_c, r.row.reading_quality, r.row.logger_assignment_id]),
     calibrations, custody, stops, lots, packaging: packaging.map((p) => ({ ...p })), legacy_reports: legacyReports, legacy_excursions: legacyExc,
   };
-  return finish({ findings, policy, shipment, correct, applied, assignments, loggers, used, inputs, gaps: gaps.gaps, temp, asOfMs });
+  return finish({ findings, policy, shipment, correct, applied, assignments, loggers, used, inputs, gaps: gaps.gaps, temp, asOfMs, disabledRules });
 }
 
 function statusOf(findings) {
@@ -109,10 +111,12 @@ function statusOf(findings) {
   return 'COMPLIANT';
 }
 
-function finish({ findings, policy, shipment, assignments, loggers, used, inputs, gaps = [], temp = null, asOfMs }) {
+function finish({ findings, policy, shipment, assignments, loggers, used, inputs, gaps = [], temp = null, asOfMs, disabledRules = [] }) {
+  const off = (code) => disabledRules.some((d) => code === d || code.startsWith(`${d}-`));
+  findings = findings.filter((f) => !off(f.rule_code));
   let status = statusOf(findings);
   const silent = evaluateSilentPass(inputs.legacy_reports ?? [], status);
-  if (silent) findings.push({ reading_ids: [], ...silent });
+  if (silent && !off(silent.rule_code)) findings.push({ reading_ids: [], ...silent });
 
   const wanted = status === 'NON_COMPLIANT' ? 'FAIL' : 'INDETERMINATE';
   const decisive = findings.filter((f) => f.result === wanted)
@@ -152,5 +156,5 @@ function finish({ findings, policy, shipment, assignments, loggers, used, inputs
     excursions.push({ ...base, issue_type: f.issue_type, start_time: null, end_time: null, duration_minutes: null, peak_temperature_c: null,
       severity: f.severity ?? severityFor({ issue_type: f.issue_type }), reading_ids: f.reading_ids, rule_code: f.rule_code });
   }
-  return { status, reason_summary: reason, policy, findings, excursions, inputs };
+  return { status, reason_summary: reason, policy, findings, excursions: excursions.filter((x) => !off(x.rule_code)), inputs };
 }

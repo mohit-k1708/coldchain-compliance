@@ -6,6 +6,12 @@ export const DEFAULT_MIX = {
   MISSING_DATA: 3, MISSING_DATA_SILENTLY_PASSED: 2, LOGGER_NOT_ASSIGNED: 2, CALIBRATION_EXPIRED: 1,
   POLICY_MISMATCH: 2, CUSTODY_GAP: 2, CROSS_SHIPMENT_EXCURSION: 1, ROUTE_DEVIATION: 2,
 };
+export const HOLDOUT_MIX = {
+  NONE: 48, BOUNDARY_AT_LIMIT: 3, EXCURSION_WITHIN_ALLOWANCE: 8, TEMPERATURE_EXCURSION: 12, CALIBRATION_MARGINAL: 4,
+  MISSING_DATA: 4, MISSING_DATA_SILENTLY_PASSED: 3, LOGGER_NOT_ASSIGNED: 4, CALIBRATION_EXPIRED: 2,
+  POLICY_MISMATCH: 3, CUSTODY_GAP: 3, CROSS_SHIPMENT_EXCURSION: 2, ROUTE_DEVIATION: 4,
+};
+export const MIXES = { default: DEFAULT_MIX, holdout: HOLDOUT_MIX };
 const CROSS = 'CROSS_SHIPMENT_EXCURSION';
 
 function countsFromMix(N, mix) {
@@ -34,7 +40,9 @@ export function resolvePlan({ seed, shipments, plan, mix = 'default' }) {
     if (mix === 'each') {
       labels = ['NONE', 'NONE', ...INJECTOR_LABELS, CROSS];
     } else {
-      const counts = countsFromMix(shipments, mix === 'default' ? DEFAULT_MIX : mix);
+      const chosen = typeof mix === 'string' ? MIXES[mix] : mix;
+      if (!chosen) throw new Error(`unknown mix ${mix}`);
+      const counts = countsFromMix(shipments, chosen);
       labels = Object.entries(counts).flatMap(([l, c]) => Array(c).fill(l));
     }
     const rng = deriveRng(seed, 'plan');

@@ -3,3 +3,4 @@ node_modules
 *.log
 data/generated/
 data/results/
+data/holdout/
