@@ -14,6 +14,8 @@
     "perf": "node scripts/perf.js",
     "full:manifest": "node scripts/full.js",
     "metrics": "node evaluation/cli.js",
-    "export:full": "node scripts/full.js"
+    "export:full": "node scripts/full.js",
+    "report": "node engine/reportCli.js",
+    "report:examples": "node scripts/reportExamples.js"
   }
 }

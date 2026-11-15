@@ -8,6 +8,7 @@ export function evaluateLegacyExcursions(legacyExcursions, confirmedRuns, depMs,
     const s = x.start_time ? ms(x.start_time) : null, e = x.end_time ? ms(x.end_time) : null;
     if (s === null && e === null) continue;
     if ((s !== null && (s < depMs || s > arrMs)) || (e !== null && (e < depMs || e > arrMs))) { outside.push(x); continue; }
+    if (confirmedRuns === null) continue; // temperature not evaluated (readings untrusted): no duration to compare
     const run = confirmedRuns.find((r) => r.start_ms === s);
     if (!run || run.duration_minutes !== x.duration_minutes) {
       mismatch.push({ excursion_id: x.excursion_id, legacy_minutes: x.duration_minutes, engine_minutes: run ? run.duration_minutes : null });

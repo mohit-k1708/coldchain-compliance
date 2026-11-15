@@ -55,7 +55,7 @@ A rule "fires" when it produces a FAIL or INDETERMINATE finding; "expected" = th
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | R-TEMP-03 | 400 | 400 | 400 | 1.0000 | 1.0000 | 1.0000 |
 | R-TEMP-04 | 100 | 100 | 100 | 1.0000 | 1.0000 | 1.0000 |
-| R-GAP-01 | 350 | 250 | 250 | 0.7143 | 1.0000 | 0.8333 |
+| R-GAP-01 | 250 | 250 | 250 | 1.0000 | 1.0000 | 1.0000 |
 | R-LOG-02 | 100 | 100 | 100 | 1.0000 | 1.0000 | 1.0000 |
 | R-LOG-03 | 50 | 50 | 50 | 1.0000 | 1.0000 | 1.0000 |
 | R-POL-01 | 100 | 100 | 100 | 1.0000 | 1.0000 | 1.0000 |
@@ -127,7 +127,7 @@ Each row removes that rule group's findings before precedence (`evaluateAll(...,
 | R-TEMP-04 | 98.00% | -2.00 pp | CALIBRATION_MARGINAL 100.00% -> 0.00% | yes | no |
 | R-GAP-01 | 95.00% | -5.00 pp | MISSING_DATA 100.00% -> 0.00%; MISSING_DATA_SILENTLY_PASSED 100.00% -> 0.00% | yes | no |
 | R-LOG-02 | 100.00% | +0.00 pp | LOGGER_NOT_ASSIGNED 100.00% -> 0.00% | yes | no |
-| R-LOG-03 | 99.00% | -1.00 pp | CALIBRATION_EXPIRED 100.00% -> 0.00% | yes | no |
+| R-LOG-03 | 100.00% | +0.00 pp | CALIBRATION_EXPIRED 100.00% -> 0.00% | yes | no |
 | R-POL-01 | 98.00% | -2.00 pp | POLICY_MISMATCH 100.00% -> 0.00% | yes | no |
 | R-CUS-01 | 98.00% | -2.00 pp | CUSTODY_GAP 100.00% -> 0.00% | yes | no |
 | R-ROUTE | 98.00% | -2.00 pp | ROUTE_DEVIATION 100.00% -> 0.00% | yes | no |
@@ -188,7 +188,7 @@ A rule "fires" when it produces a FAIL or INDETERMINATE finding; "expected" = th
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | R-TEMP-03 | 240 | 240 | 240 | 1.0000 | 1.0000 | 1.0000 |
 | R-TEMP-04 | 80 | 80 | 80 | 1.0000 | 1.0000 | 1.0000 |
-| R-GAP-01 | 220 | 140 | 140 | 0.6364 | 1.0000 | 0.7778 |
+| R-GAP-01 | 140 | 140 | 140 | 1.0000 | 1.0000 | 1.0000 |
 | R-LOG-02 | 80 | 80 | 80 | 1.0000 | 1.0000 | 1.0000 |
 | R-LOG-03 | 40 | 40 | 40 | 1.0000 | 1.0000 | 1.0000 |
 | R-POL-01 | 60 | 60 | 60 | 1.0000 | 1.0000 | 1.0000 |

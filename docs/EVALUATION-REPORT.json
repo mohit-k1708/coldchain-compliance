@@ -228,12 +228,12 @@
           "f1": 1
         },
         "R-GAP-01": {
-          "fired": 350,
+          "fired": 250,
           "expected": 250,
           "tp": 250,
-          "precision": 0.7142857142857143,
+          "precision": 1,
           "recall": 1,
-          "f1": 0.8333333333333333
+          "f1": 1
         },
         "R-LOG-02": {
           "fired": 100,
@@ -452,9 +452,9 @@
     },
     {
       "rule": "R-LOG-03",
-      "accuracy": 0.99,
-      "accuracy_delta": -0.010000000000000009,
-      "macro_f1": 0.9854756717501815,
+      "accuracy": 1,
+      "accuracy_delta": 0,
+      "macro_f1": 1,
       "changes": [
         {
           "label": "CALIBRATION_EXPIRED",
@@ -789,12 +789,12 @@
           "f1": 1
         },
         "R-GAP-01": {
-          "fired": 220,
+          "fired": 140,
           "expected": 140,
           "tp": 140,
-          "precision": 0.6363636363636364,
+          "precision": 1,
           "recall": 1,
-          "f1": 0.7777777777777778
+          "f1": 1
         },
         "R-LOG-02": {
           "fired": 80,
