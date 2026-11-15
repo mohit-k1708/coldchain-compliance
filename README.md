@@ -12,6 +12,21 @@ This repository is a deterministic prototype that answers it end to end on synth
 
 What it proves, and what it does not: the engine does exactly what the documented rules say, reproducibly, with evidence. It does not prove accuracy on real cold-chain data (see [Honest limitations](#honest-limitations)).
 
+## Screenshots
+Captured from the running app on the 5,000-shipment dataset.
+
+![Dashboard with status counts, open exceptions and charts](docs/screenshots/dashboard.png)
+
+*Dashboard: 3,800 compliant, 500 non-compliant and 700 indeterminate shipments, 1,417 open exceptions, and the top rule codes behind the decisions.*
+
+![Shipment detail with temperature chart and decision trace](docs/screenshots/shipment-detail.png)
+
+*Shipment detail: the permitted temperature band, the shaded excursion periods and the decision trace that explains the status rule by rule.*
+
+![Evaluation page comparing the engine with the naive baseline](docs/screenshots/evaluation.png)
+
+*Evaluation: confusion matrix and per-issue detection against ground truth, with the naive baseline comparison below.*
+
 ## Requirements
 - Node.js **>= 22.13** (`node:sqlite`). Tested on **v24.18.1** (Windows 10). No other tools; no database server.
 - npm. Runtime dependency of the server: `express`. The UI in `client/` has its own dependencies (React, React Router, Recharts, Vite, Vitest).
