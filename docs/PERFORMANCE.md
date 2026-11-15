@@ -49,3 +49,28 @@ Evaluation produced 5000 runs, 100592 findings, 1785 engine excursions.
 | excursion_evidence.csv | 0.25 |
 | excursion_report.csv | 0.33 |
 | summary.json | 0.00 |
+
+## Database and API (5,000 shipments)
+
+Added by Phase 7 (`npm run db:build`, `npm run bench:api`; `npm run perf` rewrites the top of this file, re-add this section if you re-run it).
+
+| step | result |
+|---|---|
+| `db:build` | 1,402,309 rows loaded in 34.0 s (41,278 rows/s), indexes + foreign_key_check + workflow seeding + ANALYZE, 39.0 s in total, peak RSS 235 MB |
+| database file | 349.9 MB (`data/app.db`, not committed) |
+| seeded workflow | 653 of 1,685 engine exceptions progressed (ASSIGNED 175, INVESTIGATING 142, RESOLVED 268, ESCALATED 68), every history row through `applyTransition` |
+
+Response times on a local machine (Node 24, SQLite file DB, the server in the same process as the client):
+
+| endpoint | run 1 (ms) | run 2 (ms) | run 3 (ms) |
+|---|---:|---:|---:|
+| GET /api/dashboard | 123.6 | 47.8 | 56.9 |
+| GET /api/shipments?page=1 | 25.0 | 26.4 | 15.5 |
+| GET /api/shipments?status=NON_COMPLIANT&pageSize=200 | 28.2 | 29.1 | 37.7 |
+| GET /api/shipments/SHP-2026-001004 (detail) | 21.9 | 14.5 | 13.8 |
+| GET /api/shipments/SHP-2026-001004/readings | 13.3 | 15.9 | 17.3 |
+| GET /api/shipments/SHP-2026-001004/report (json) | 34.4 | 10.3 | 27.2 |
+| GET /api/shipments/SHP-2026-001004/report?format=html | 17.4 | 15.0 | 9.7 |
+| GET /api/exceptions?pageSize=50 | 18.2 | 4.2 | 3.5 |
+
+Query plans (`EXPLAIN QUERY PLAN`): the readings window uses `idx_reading_logger_time`; findings use `idx_finding_run`; the exceptions list uses `idx_excursion_source`. The shipments list scans the 5,000 current compliance runs (acceptable at this size). Five indexes were added to `database/schema.sql` for these queries.

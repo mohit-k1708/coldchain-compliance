@@ -18,7 +18,8 @@
     "report": "node engine/reportCli.js",
     "report:examples": "node scripts/reportExamples.js",
     "db:build": "node server/build.js",
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "bench:api": "node scripts/apiBench.js"
   },
   "dependencies": {
     "express": "^5.3.0"

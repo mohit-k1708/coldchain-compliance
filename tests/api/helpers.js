@@ -24,7 +24,7 @@ export async function startServer(db) {
   await new Promise((r) => server.once('listening', r));
   const base = `http://127.0.0.1:${server.address().port}`;
   const call = async (method, path, { body, role, raw } = {}) => {
-    const headers = { ...(role ? { 'x-role': role } : {}), ...(body !== undefined && !raw ? { 'content-type': 'application/json' } : {}) };
+    const headers = { ...(role ? { 'x-role': role } : {}), ...(body !== undefined || raw !== undefined ? { 'content-type': 'application/json' } : {}) };
     const res = await fetch(base + path, { method, headers, body: raw ?? (body !== undefined ? JSON.stringify(body) : undefined) });
     const text = await res.text();
     let json = null;
