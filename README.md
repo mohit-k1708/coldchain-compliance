@@ -20,8 +20,8 @@ What it proves, and what it does not: the engine does exactly what the documente
 Copy-paste, from an empty folder. This builds the 100-shipment sample and serves the UI (about 2 minutes).
 
 ```bash
-git clone <repository-url> coldchain
-cd coldchain
+git clone https://github.com/mohit-k1708/coldchain-compliance.git
+cd coldchain-compliance
 npm install
 npm run client:install
 npm run generate -- --seed=20261022 --shipments=100
@@ -117,7 +117,7 @@ The problem statement is silent or ambiguous on these points; each choice is our
 ## The five mandatory edge cases
 Generated from the committed sample and a real engine run by `npm run docs:edgecases`; full detail in [docs/EDGE-CASES.md](docs/EDGE-CASES.md).
 
-| # | scenario | synthetic input | ground truth | engine result | automated test | evidence |
+| No. | scenario | synthetic input | ground truth | engine result | automated test | evidence |
 |---|---|---|---|---|---|---|
 | 1 | Logger not assigned | readings exist, no assignment row covers the shipment (SHP-2026-000012) | INDETERMINATE, R-LOG-02 | INDETERMINATE [R-LOG-02] | `tests/engine/unit.test.js`: "h: the five mandatory cases" | [report](docs/examples/LOGGER_NOT_ASSIGNED-SHP-2026-000012.md) |
 | 2 | Policy mismatch | shipment uses another product's or a not-yet-effective policy (SHP-2026-000075) | INDETERMINATE, R-POL-01 | INDETERMINATE [R-POL-01] | same test | [report](docs/examples/POLICY_MISMATCH-SHP-2026-000075.md) |
