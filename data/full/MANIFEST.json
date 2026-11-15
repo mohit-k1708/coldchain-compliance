@@ -1,0 +1,126 @@
+{
+  "note": "Not committed: the largest file (temperature_reading.csv, 141.8 MB) exceeds the 50 MB limit. Regenerate with the command below; checksums are of the UNCOMPRESSED files.",
+  "command": "npm run generate -- --seed=20261022 --shipments=5000 --loggers=1000",
+  "seed": 20261022,
+  "shipments": 5000,
+  "loggers": 1000,
+  "mix": "default",
+  "generator_version": "0.0.0",
+  "files": {
+    "party.csv": {
+      "rows": 15,
+      "sha256": "df77b6684f6c38849e67baa857235da0a2c1ba14f8fcc6c9221d67e84cdaf4bc",
+      "bytes": 566
+    },
+    "product.csv": {
+      "rows": 5,
+      "sha256": "bca0da0f3e1551cd0d7d39430962780be9fd385aab9f78ab14dcf8693c668bb2",
+      "bytes": 516
+    },
+    "lot.csv": {
+      "rows": 10,
+      "sha256": "c796d6a1f0e34e4e6735aa782e84b82414f55d813a6f165ee0dc2c8e2c8c396b",
+      "bytes": 861
+    },
+    "packaging.csv": {
+      "rows": 3,
+      "sha256": "b7784067ac7fd690ef1fe57e0951fc08329b8b6d4fac3b833b2204f7f8f70642",
+      "bytes": 286
+    },
+    "logger.csv": {
+      "rows": 1000,
+      "sha256": "4adfac729813b2f5c81122a83a70ab3d03fbfc987b6fd8601e72375dbb15e043",
+      "bytes": 69186
+    },
+    "logger_calibration.csv": {
+      "rows": 1000,
+      "sha256": "d869b1d9f564e2be0ab23b63d45c1db469a4d2644cfa6fa567e4d296b5858a72",
+      "bytes": 49064
+    },
+    "threshold_policy.csv": {
+      "rows": 10,
+      "sha256": "d63736f089b44814a310824106208885bbf6ef8e61f6a265cff36e817ec7f9d1",
+      "bytes": 1076
+    },
+    "shipment.csv": {
+      "rows": 5000,
+      "sha256": "30a97e4846da8bf66dffa3f95361fa847362ac2fc4c018cae5fda69ae8cbca47",
+      "bytes": 947808
+    },
+    "shipment_status_history.csv": {
+      "rows": 20000,
+      "sha256": "5f7c5d50742b691c391326ca57faa1323a83af3c21cdcf164e78475b205479dd",
+      "bytes": 1515067
+    },
+    "shipment_lot.csv": {
+      "rows": 7468,
+      "sha256": "35dc880d82fb1bd7654f7b19434832098553b3d2ea0e09f94007daf0c51e5fa9",
+      "bytes": 268897
+    },
+    "shipment_packaging.csv": {
+      "rows": 5000,
+      "sha256": "e7c609ac4e66b843e70c975e4a09a569b45a2d55aaa9ff070276d0d4509325b1",
+      "bytes": 345051
+    },
+    "logger_assignment.csv": {
+      "rows": 4942,
+      "sha256": "2c08997fd44e44c0344ac4dc68a93643fbc7a6b8990117733e974dc5c27328b0",
+      "bytes": 504171
+    },
+    "temperature_reading.csv": {
+      "rows": 1196041,
+      "sha256": "bfecd575dbd5ffec0cec59a08a83f5bfe7ad2fbbae52deb7547566772d3062e5",
+      "bytes": 148649421
+    },
+    "custody_event.csv": {
+      "rows": 17406,
+      "sha256": "b1481ee5b3100260817f5bcd4f4654c0e2a67c56bc069612b058643bc1f98a38",
+      "bytes": 1978583
+    },
+    "route_stop.csv": {
+      "rows": 17511,
+      "sha256": "98545cf18580d7ec8333bf5598fc323304d107a35b7a0185867d7b226ae2dba0",
+      "bytes": 2181464
+    },
+    "compliance_run.csv": {
+      "rows": 0,
+      "sha256": "5958abfc9c70f6aaf7aa1c9a5f36b2fdc9f5db147ef5ccae6fcbf83e190b1e29",
+      "bytes": 232
+    },
+    "compliance_finding.csv": {
+      "rows": 0,
+      "sha256": "557051083adfa1296159ef47656bd87cf0d80afb7a0daff058b61a807e3113e6",
+      "bytes": 65
+    },
+    "compliance_evidence.csv": {
+      "rows": 0,
+      "sha256": "79fdf67b45562625868da7f0ae8be24eea9bfc8f589f06e819b18781f70fdce9",
+      "bytes": 22
+    },
+    "excursion_report.csv": {
+      "rows": 835,
+      "sha256": "ffe54d46c44bb042574670860268cbd1d30746e0570735df30c983151d1f5ab9",
+      "bytes": 159193
+    },
+    "excursion_evidence.csv": {
+      "rows": 4006,
+      "sha256": "a022878706a64a064634ea5b5fd9feee1816946982c2b38cf193ebc18a7bbf3b",
+      "bytes": 200324
+    },
+    "exception_event.csv": {
+      "rows": 0,
+      "sha256": "f7f2933d0ef9a6016d69e2540d78d2b9b68e2d6a96c3b4fca6a98f52023227dd",
+      "bytes": 79
+    },
+    "legacy_report.csv": {
+      "rows": 4850,
+      "sha256": "17d8dfd8ce0846bf44dbbe5d9a6c39f78c5c2989eb3a1d054cd4311a40ad6fa0",
+      "bytes": 349269
+    },
+    "ground_truth.csv": {
+      "rows": 5000,
+      "sha256": "b981f34a06bf6000fba3d3a39ac46422494e5fa4c167be476e1d213be89844bf",
+      "bytes": 321211
+    }
+  }
+}

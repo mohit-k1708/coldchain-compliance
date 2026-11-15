@@ -1,0 +1,101 @@
+{
+  "seed": 20261022,
+  "shipments": 100,
+  "loggers": 20,
+  "mix": "default",
+  "generator_version": "0.0.0",
+  "files": {
+    "party.csv": {
+      "rows": 15,
+      "sha256": "df77b6684f6c38849e67baa857235da0a2c1ba14f8fcc6c9221d67e84cdaf4bc"
+    },
+    "product.csv": {
+      "rows": 5,
+      "sha256": "bca0da0f3e1551cd0d7d39430962780be9fd385aab9f78ab14dcf8693c668bb2"
+    },
+    "lot.csv": {
+      "rows": 10,
+      "sha256": "c796d6a1f0e34e4e6735aa782e84b82414f55d813a6f165ee0dc2c8e2c8c396b"
+    },
+    "packaging.csv": {
+      "rows": 3,
+      "sha256": "b7784067ac7fd690ef1fe57e0951fc08329b8b6d4fac3b833b2204f7f8f70642"
+    },
+    "logger.csv": {
+      "rows": 20,
+      "sha256": "37b6a768d8f80490c9e5c8c4719d1943ab601cc45ac289c50f42cdcb420733b4"
+    },
+    "logger_calibration.csv": {
+      "rows": 20,
+      "sha256": "144114d5c0e7c993848c5c12f8295aa13b4bd9c4150df5b8b968fe55c9b8db3d"
+    },
+    "threshold_policy.csv": {
+      "rows": 10,
+      "sha256": "d63736f089b44814a310824106208885bbf6ef8e61f6a265cff36e817ec7f9d1"
+    },
+    "shipment.csv": {
+      "rows": 100,
+      "sha256": "54d90ea3806b14509a297f43a2a498b1ec6e4fa77df24e56628d50ea3c557942"
+    },
+    "shipment_status_history.csv": {
+      "rows": 400,
+      "sha256": "a3e0e7ba6aac67c2be3e4075081a2a17f72e33ee2f9cbd19db755f33d6138a5c"
+    },
+    "shipment_lot.csv": {
+      "rows": 152,
+      "sha256": "b7779b3dd092d4a95ec15b5a54bc39d85728b4dc6ef888af0dbc4da74e17308e"
+    },
+    "shipment_packaging.csv": {
+      "rows": 100,
+      "sha256": "cac447bd64d2b997c25486a31ce988601dc5270b0c7a22baec8ab8b5f5c8a813"
+    },
+    "logger_assignment.csv": {
+      "rows": 99,
+      "sha256": "c1494ea60a80fdbf159bb17b4171c8547852c7f80357ed4fe33d6ab88047ced8"
+    },
+    "temperature_reading.csv": {
+      "rows": 24412,
+      "sha256": "93b2e6b64d4d05814522e8d623c9f4bd9df6ba391a5176e4d0d8f36651c85dec"
+    },
+    "custody_event.csv": {
+      "rows": 349,
+      "sha256": "0ee55e968911030ee166e47954c1b4219e1630416ebfb2c0e2c17ed366bfa0ab"
+    },
+    "route_stop.csv": {
+      "rows": 350,
+      "sha256": "d00ed9c044e93a929b45437010b31639bdb9c3c078ff47e91c9528cb10f7e058"
+    },
+    "compliance_run.csv": {
+      "rows": 0,
+      "sha256": "5958abfc9c70f6aaf7aa1c9a5f36b2fdc9f5db147ef5ccae6fcbf83e190b1e29"
+    },
+    "compliance_finding.csv": {
+      "rows": 0,
+      "sha256": "557051083adfa1296159ef47656bd87cf0d80afb7a0daff058b61a807e3113e6"
+    },
+    "compliance_evidence.csv": {
+      "rows": 0,
+      "sha256": "79fdf67b45562625868da7f0ae8be24eea9bfc8f589f06e819b18781f70fdce9"
+    },
+    "excursion_report.csv": {
+      "rows": 20,
+      "sha256": "7ee0a39d194a14707ec7c8f25f9fc20e56c189f04069008993d558e790c27605"
+    },
+    "excursion_evidence.csv": {
+      "rows": 78,
+      "sha256": "bdbd80c89dee4154b7df93b8b46fac9ead5b1f2e4155cf7697e013ec1f61a167"
+    },
+    "exception_event.csv": {
+      "rows": 0,
+      "sha256": "f7f2933d0ef9a6016d69e2540d78d2b9b68e2d6a96c3b4fca6a98f52023227dd"
+    },
+    "legacy_report.csv": {
+      "rows": 97,
+      "sha256": "1959b449ae5ebd68bcf52d283b93d2cd620a232be36f7743b06e2cc3499aae95"
+    },
+    "ground_truth.csv": {
+      "rows": 100,
+      "sha256": "aa736e4a8acc2ee7e9274294b07b20b32e16c8a4c859844006208d0f02e00e8b"
+    }
+  }
+}

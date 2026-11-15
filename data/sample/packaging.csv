@@ -1,0 +1,4 @@
+packaging_id,packaging_type,min_supported_temp_c,max_supported_temp_c,qualified_duration_hours,packaging_status
+PKG-000001,Passive insulated shipper 2-8C,0.00,10.00,96,ACTIVE
+PKG-000002,Deep-frozen shipper,-30.00,-10.00,96,ACTIVE
+PKG-000003,Ambient shipper 15-25C,10.00,30.00,48,ACTIVE

@@ -1,0 +1,1 @@
+compliance_run_id,shipment_id,policy_id,policy_version,policy_min_temp_c,policy_max_temp_c,policy_max_excursion_minutes,policy_max_data_gap_minutes,compliance_status,reason_summary,engine_version,input_fingerprint,run_at,is_current

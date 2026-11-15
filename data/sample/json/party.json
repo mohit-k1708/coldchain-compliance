@@ -1,0 +1,17 @@
+[
+{"party_id":"PTY-000001","party_name":"Nordic Biologics","party_type":"SUPPLIER"},
+{"party_id":"PTY-000002","party_name":"Helix Pharma","party_type":"SUPPLIER"},
+{"party_id":"PTY-000003","party_name":"Aurora Labs","party_type":"SUPPLIER"},
+{"party_id":"PTY-000004","party_name":"FrostLine Logistics","party_type":"CARRIER"},
+{"party_id":"PTY-000005","party_name":"ArcticFreight","party_type":"CARRIER"},
+{"party_id":"PTY-000006","party_name":"CoolRoute","party_type":"CARRIER"},
+{"party_id":"PTY-000007","party_name":"PolarExpress","party_type":"CARRIER"},
+{"party_id":"PTY-000008","party_name":"ChillTrans","party_type":"CARRIER"},
+{"party_id":"PTY-000009","party_name":"IceWay Cargo","party_type":"CARRIER"},
+{"party_id":"PTY-000010","party_name":"Central Cold Store","party_type":"WAREHOUSE"},
+{"party_id":"PTY-000011","party_name":"Harbor Depot","party_type":"WAREHOUSE"},
+{"party_id":"PTY-000012","party_name":"Metro Pharma Hub","party_type":"WAREHOUSE"},
+{"party_id":"PTY-000013","party_name":"Northgate Warehouse","party_type":"WAREHOUSE"},
+{"party_id":"PTY-000014","party_name":"Riverside Cold Storage","party_type":"WAREHOUSE"},
+{"party_id":"PTY-000015","party_name":"Summit Distribution","party_type":"WAREHOUSE"}
+]

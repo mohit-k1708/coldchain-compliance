@@ -1,0 +1,5 @@
+*.csv text eol=lf
+*.sql text eol=lf
+*.json text eol=lf
+*.gz binary
+*.md text eol=lf

@@ -1,0 +1,5 @@
+[
+{"packaging_id":"PKG-000001","packaging_type":"Passive insulated shipper 2-8C","min_supported_temp_c":0,"max_supported_temp_c":10,"qualified_duration_hours":96,"packaging_status":"ACTIVE"},
+{"packaging_id":"PKG-000002","packaging_type":"Deep-frozen shipper","min_supported_temp_c":-30,"max_supported_temp_c":-10,"qualified_duration_hours":96,"packaging_status":"ACTIVE"},
+{"packaging_id":"PKG-000003","packaging_type":"Ambient shipper 15-25C","min_supported_temp_c":10,"max_supported_temp_c":30,"qualified_duration_hours":48,"packaging_status":"ACTIVE"}
+]

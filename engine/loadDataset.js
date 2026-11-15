@@ -16,8 +16,8 @@ export function loadTable(dir, name) {
   return existsSync(f) ? csvToRows(name, readFileSync(f, 'utf8')) : [];
 }
 
-export function loadDataset(dir) {
+export function loadDataset(dir, { skip = [] } = {}) {
   const ds = {};
-  for (const t of TABLES) ds[t] = loadTable(dir, t);
+  for (const t of TABLES) ds[t] = skip.includes(t) ? [] : loadTable(dir, t);
   return ds;
 }

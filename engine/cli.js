@@ -2,14 +2,16 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadDataset } from './loadDataset.js';
+import { ReadingStore } from './readingStore.js';
 import { evaluateAll, DEFAULT_AS_OF } from './index.js';
 import { tableToCsv } from '../generator/csv.js';
 
 export function run({ inDir, outDir, asOf }) {
   const t0 = performance.now();
-  const ds = loadDataset(inDir);
+  const ds = loadDataset(inDir, { skip: ['temperature_reading'] });
+  const readingStore = ReadingStore.load(resolve(inDir, 'temperature_reading.csv'));
   const tLoad = performance.now();
-  const res = evaluateAll(ds, { asOf });
+  const res = evaluateAll(ds, { asOf, readingStore });
   const t1 = performance.now();
   mkdirSync(outDir, { recursive: true });
   const files = { compliance_run: res.runs, compliance_finding: res.findings, compliance_evidence: res.evidence,
@@ -36,4 +38,5 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   const args = Object.fromEntries(process.argv.slice(2).filter((a) => a.startsWith('--')).map((a) => a.slice(2).split('=')));
   const summary = run({ inDir: args.in ?? 'data/generated', outDir: args.out ?? 'data/results', asOf: args['as-of'] ?? DEFAULT_AS_OF });
   console.log(JSON.stringify(summary, null, 2));
+  console.log(JSON.stringify({ step: 'evaluate', elapsed_ms: summary.runtime_ms, peak_rss_mb: summary.peak_memory_mb }));
 }

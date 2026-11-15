@@ -23,7 +23,7 @@ function upperBound(arr, x) {
   return lo;
 }
 
-export function buildIndexes(ds) {
+export function buildIndexes(ds, { readingStore = null } = {}) {
   const rows = (t) => ds[t] ?? [];
   const readingsByLogger = new Map();
   for (const r of rows('temperature_reading')) {
@@ -52,6 +52,7 @@ export function buildIndexes(ds) {
       .map(([k, v]) => [k, v.map((sp) => ({ ...sp, profile: packagingById.get(sp.packaging_id) ?? null }))])),
     // readings of one logger with from <= recorded_at <= to, via binary search (no full scans)
     windowReadings(loggerId, fromMs, toMs) {
+      if (readingStore) return readingStore.windowReadings(loggerId, fromMs, toMs);
       const arr = readingsByLogger.get(loggerId);
       if (!arr) return [];
       return arr.slice(lowerBound(arr, fromMs), upperBound(arr, toMs));

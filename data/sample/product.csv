@@ -1,0 +1,6 @@
+product_id,product_name,category,supplier_party_id,required_min_temp_c,required_max_temp_c,max_excursion_minutes,created_at
+PRD-000001,Vaccine A,VACCINE,PTY-000001,2.00,8.00,30,2026-01-01T00:00:00Z
+PRD-000002,Biologic B,BIOLOGIC,PTY-000002,2.00,8.00,45,2026-01-01T00:00:00Z
+PRD-000003,Insulin C,INSULIN,PTY-000003,2.00,8.00,60,2026-01-01T00:00:00Z
+PRD-000004,Frozen Vaccine D,VACCINE,PTY-000001,-25.00,-15.00,20,2026-01-01T00:00:00Z
+PRD-000005,Ambient Product E,OTHER,PTY-000002,15.00,25.00,120,2026-01-01T00:00:00Z

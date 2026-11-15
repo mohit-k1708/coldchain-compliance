@@ -1,0 +1,16 @@
+party_id,party_name,party_type
+PTY-000001,Nordic Biologics,SUPPLIER
+PTY-000002,Helix Pharma,SUPPLIER
+PTY-000003,Aurora Labs,SUPPLIER
+PTY-000004,FrostLine Logistics,CARRIER
+PTY-000005,ArcticFreight,CARRIER
+PTY-000006,CoolRoute,CARRIER
+PTY-000007,PolarExpress,CARRIER
+PTY-000008,ChillTrans,CARRIER
+PTY-000009,IceWay Cargo,CARRIER
+PTY-000010,Central Cold Store,WAREHOUSE
+PTY-000011,Harbor Depot,WAREHOUSE
+PTY-000012,Metro Pharma Hub,WAREHOUSE
+PTY-000013,Northgate Warehouse,WAREHOUSE
+PTY-000014,Riverside Cold Storage,WAREHOUSE
+PTY-000015,Summit Distribution,WAREHOUSE

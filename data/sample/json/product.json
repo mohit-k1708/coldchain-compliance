@@ -1,0 +1,7 @@
+[
+{"product_id":"PRD-000001","product_name":"Vaccine A","category":"VACCINE","supplier_party_id":"PTY-000001","required_min_temp_c":2,"required_max_temp_c":8,"max_excursion_minutes":30,"created_at":"2026-01-01T00:00:00Z"},
+{"product_id":"PRD-000002","product_name":"Biologic B","category":"BIOLOGIC","supplier_party_id":"PTY-000002","required_min_temp_c":2,"required_max_temp_c":8,"max_excursion_minutes":45,"created_at":"2026-01-01T00:00:00Z"},
+{"product_id":"PRD-000003","product_name":"Insulin C","category":"INSULIN","supplier_party_id":"PTY-000003","required_min_temp_c":2,"required_max_temp_c":8,"max_excursion_minutes":60,"created_at":"2026-01-01T00:00:00Z"},
+{"product_id":"PRD-000004","product_name":"Frozen Vaccine D","category":"VACCINE","supplier_party_id":"PTY-000001","required_min_temp_c":-25,"required_max_temp_c":-15,"max_excursion_minutes":20,"created_at":"2026-01-01T00:00:00Z"},
+{"product_id":"PRD-000005","product_name":"Ambient Product E","category":"OTHER","supplier_party_id":"PTY-000002","required_min_temp_c":15,"required_max_temp_c":25,"max_excursion_minutes":120,"created_at":"2026-01-01T00:00:00Z"}
+]

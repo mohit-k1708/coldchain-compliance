@@ -195,3 +195,12 @@ PK (`finding_id`|`excursion_id`, `reading_id`) FKs to finding/excursion and temp
 
 ## Not in the application database
 `ground_truth.csv` (shipment_id, issue_type, expected_decision, expected_evidence_category, expected_rule) lives outside the DB, is written by the generator, and is read only by the evaluation script.
+
+Full columns: `shipment_id, issue_type, variant, expected_decision, expected_evidence_category, expected_rule, expected_excursion_minutes, expected_gap_minutes, related_shipment_id` (see BUSINESS-RULES section 6).
+
+---
+
+## CSV file format and row order
+- One CSV per table, header = schema column order, LF line endings (never CR), numbers fixed-point (NUMERIC scale), empty cell = NULL, booleans `true`/`false`.
+- **Row order is the deterministic generation order, not primary-key order**: master data first (parties, products, lots, packaging, loggers, calibrations, policies), then each shipment in shipment-number order with all of its child rows (readings in time order). The streaming generator writes rows as they are produced, so the same seed always gives byte-identical files and stable checksums. (Engine result files under `data/results` are still sorted by primary key.)
+- `manifest.json` records seed, shipments, loggers, mix, generator version, and row count and sha256 per file. No timestamps or git hashes are written into checksummed files.

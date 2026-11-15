@@ -1,0 +1,12 @@
+[
+{"lot_id":"LOT-2026-000001","product_id":"PRD-000001","manufacturing_date":"2025-09-01","expiry_date":"2027-03-01","lot_status":"RELEASED","created_at":"2025-12-01T00:00:00Z"},
+{"lot_id":"LOT-2026-000002","product_id":"PRD-000001","manufacturing_date":"2025-11-01","expiry_date":"2027-05-01","lot_status":"RELEASED","created_at":"2025-12-01T00:00:00Z"},
+{"lot_id":"LOT-2026-000003","product_id":"PRD-000002","manufacturing_date":"2025-09-01","expiry_date":"2027-03-01","lot_status":"RELEASED","created_at":"2025-12-01T00:00:00Z"},
+{"lot_id":"LOT-2026-000004","product_id":"PRD-000002","manufacturing_date":"2025-11-01","expiry_date":"2027-05-01","lot_status":"RELEASED","created_at":"2025-12-01T00:00:00Z"},
+{"lot_id":"LOT-2026-000005","product_id":"PRD-000003","manufacturing_date":"2025-09-01","expiry_date":"2027-03-01","lot_status":"RELEASED","created_at":"2025-12-01T00:00:00Z"},
+{"lot_id":"LOT-2026-000006","product_id":"PRD-000003","manufacturing_date":"2025-11-01","expiry_date":"2027-05-01","lot_status":"RELEASED","created_at":"2025-12-01T00:00:00Z"},
+{"lot_id":"LOT-2026-000007","product_id":"PRD-000004","manufacturing_date":"2025-09-01","expiry_date":"2027-03-01","lot_status":"RELEASED","created_at":"2025-12-01T00:00:00Z"},
+{"lot_id":"LOT-2026-000008","product_id":"PRD-000004","manufacturing_date":"2025-11-01","expiry_date":"2027-05-01","lot_status":"RELEASED","created_at":"2025-12-01T00:00:00Z"},
+{"lot_id":"LOT-2026-000009","product_id":"PRD-000005","manufacturing_date":"2025-09-01","expiry_date":"2027-03-01","lot_status":"RELEASED","created_at":"2025-12-01T00:00:00Z"},
+{"lot_id":"LOT-2026-000010","product_id":"PRD-000005","manufacturing_date":"2025-11-01","expiry_date":"2027-05-01","lot_status":"RELEASED","created_at":"2025-12-01T00:00:00Z"}
+]

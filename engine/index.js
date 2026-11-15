@@ -59,8 +59,8 @@ const numOf = (id) => Number(String(id).match(/(\d+)$/)?.[1] ?? 0);
 
 // ds: plain table object. options: { asOf, existing } where existing = a previous evaluateAll result.
 // Re-running with identical inputs adds nothing; changed inputs add a NEW run and supersede (never overwrite) the old one.
-export function evaluateAll(ds, { asOf = DEFAULT_AS_OF, existing = null } = {}) {
-  const idx = buildIndexes(ds);
+export function evaluateAll(ds, { asOf = DEFAULT_AS_OF, existing = null, readingStore = null } = {}) {
+  const idx = buildIndexes(ds, { readingStore });
   const out = { runs: [], findings: [], evidence: [], excursions: [], excursionEvidence: [], supersededRunIds: [] };
   const known = new Map((existing?.runs ?? []).map((r) => [`${r.shipment_id}|${r.input_fingerprint}`, r]));
   const currentByShipment = new Map();

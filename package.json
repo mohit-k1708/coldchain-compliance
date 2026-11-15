@@ -6,6 +6,12 @@
     "test": "node --test \"tests/**/*.test.js\"",
     "generate": "node generator/index.js",
     "validate": "node generator/validateData.js",
-    "evaluate": "node engine/cli.js"
+    "evaluate": "node engine/cli.js",
+    "reproduce": "node scripts/reproduce.js",
+    "stats": "node scripts/stats.js",
+    "export:sql": "node scripts/export.js --format=sql",
+    "export:json": "node scripts/export.js --format=json",
+    "perf": "node scripts/perf.js",
+    "full:manifest": "node scripts/full.js"
   }
 }
