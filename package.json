@@ -16,6 +16,11 @@
     "metrics": "node evaluation/cli.js",
     "export:full": "node scripts/full.js",
     "report": "node engine/reportCli.js",
-    "report:examples": "node scripts/reportExamples.js"
+    "report:examples": "node scripts/reportExamples.js",
+    "db:build": "node server/build.js",
+    "start": "node server/index.js"
+  },
+  "dependencies": {
+    "express": "^5.3.0"
   }
 }

@@ -267,3 +267,8 @@ CREATE INDEX idx_route_stop_shipment ON route_stop(shipment_id);
 CREATE INDEX idx_excursion_shipment ON excursion_report(shipment_id);
 CREATE INDEX idx_run_shipment ON compliance_run(shipment_id);
 CREATE INDEX idx_shipment_status ON shipment(shipment_status);
+CREATE INDEX idx_finding_run ON compliance_finding(compliance_run_id);
+CREATE INDEX idx_event_excursion ON exception_event(excursion_id);
+CREATE INDEX idx_run_current ON compliance_run(shipment_id, is_current);
+CREATE INDEX idx_shipment_product ON shipment(product_id);
+CREATE INDEX idx_excursion_source ON excursion_report(source, status);

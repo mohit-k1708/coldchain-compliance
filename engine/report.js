@@ -20,7 +20,7 @@ const EVIDENCE_CAP = 200;
 const dwell = (s) => (s.actual_arrival && s.actual_departure ? (ms(s.actual_departure) - ms(s.actual_arrival)) / MIN : null);
 const num = (x, d = 2) => (x === null || x === undefined ? '' : Number(x).toFixed(d));
 
-export function buildReport(tables, shipmentId, { asOf = DEFAULT_AS_OF, readingStore = null, priorRuns = null } = {}) {
+export function buildReport(tables, shipmentId, { asOf = DEFAULT_AS_OF, readingStore = null, priorRuns = null, runId = null } = {}) {
   const idx = buildIndexes(tables, { readingStore });
   const shipment = idx.shipments.find((s) => s.shipment_id === shipmentId);
   if (!shipment) throw new Error(`shipment ${shipmentId} not found`);
@@ -124,7 +124,7 @@ export function buildReport(tables, shipmentId, { asOf = DEFAULT_AS_OF, readingS
   const exceptions = (tables.exception_event ?? []).filter((e) => excIds.has(e.excursion_id)).map((e) => ({ excursion_id: e.excursion_id, from_status: e.from_status, to_status: e.to_status, analyst: e.analyst, note: e.note, occurred_at: e.occurred_at }));
 
   return {
-    header: { shipment_id: shipmentId, status: draft.status, reason_summary: draft.reason_summary, root_rule: (draft.reason_summary.match(/\[([^\]]+)\]/) ?? [])[1], run_id: `RUN-2026-${String(runNo).padStart(6, '0')}`,
+    header: { shipment_id: shipmentId, status: draft.status, reason_summary: draft.reason_summary, root_rule: (draft.reason_summary.match(/\[([^\]]+)\]/) ?? [])[1], run_id: runId ?? `RUN-2026-${String(runNo).padStart(6, '0')}`,
       as_of: asOf, engine_version: ENGINE_VERSION, fingerprint: draft.fingerprint },
     context, policy: policySec, trace, temperature, gaps, route, custody, evidence, history: { earlier_runs: prior, exceptions },
   };

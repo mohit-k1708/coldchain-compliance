@@ -53,6 +53,22 @@ export class ReadingStore {
     return store;
   }
 
+  // Build a small store from row objects (used by the API for one shipment's logger readings)
+  static fromRows(rows) {
+    const store = new ReadingStore();
+    const asgIndex = new Map();
+    for (const r of rows) {
+      let s = store.series.get(r.logger_id);
+      if (!s) { s = new LoggerSeries(); store.series.set(r.logger_id, s); }
+      let a = -1;
+      if (r.logger_assignment_id) { a = asgIndex.get(r.logger_assignment_id); if (a === undefined) { a = store.assignmentIds.length; store.assignmentIds.push(r.logger_assignment_id); asgIndex.set(r.logger_assignment_id, a); } }
+      s.push(ms(r.recorded_at), ms(r.received_at), r.temperature_c, r.calibration_uncertainty_c, QCODE.get(r.reading_quality) ?? 2, a);
+      store.count++;
+    }
+    for (const s of store.series.values()) s.finalize();
+    return store;
+  }
+
   // [{ t, row }] for readings of one logger with from <= recorded_at <= to
   windowReadings(loggerId, fromMs, toMs) {
     const s = this.series.get(loggerId);
