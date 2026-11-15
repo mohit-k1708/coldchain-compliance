@@ -85,7 +85,7 @@ Duration (minutes):
 
 ## Engine excursion reports (data/results)
 
-Total: 1785
+Total: 1685
 
 | issue_type | count |
 |---|---:|
@@ -94,7 +94,7 @@ Total: 1785
 | CROSS_SHIPMENT_REPORT | 25 |
 | CUSTODY_GAP | 100 |
 | LOGGER_NOT_ASSIGNED | 100 |
-| MISSING_DATA | 350 |
+| MISSING_DATA | 250 |
 | POLICY_MISMATCH | 100 |
 | ROUTE_DEVIATION | 100 |
 | TEMP_HIGH | 429 |

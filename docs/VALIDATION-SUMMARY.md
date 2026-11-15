@@ -10,7 +10,7 @@
 | shipments | 5000 |
 | loggers | 1000 |
 | mix | default |
-| generator_version | 0.0.0 |
+| generator_version | 1.0.0 |
 
 ## Record counts
 

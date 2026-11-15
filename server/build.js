@@ -9,6 +9,7 @@ import { streamRows } from '../generator/csvStream.js';
 import { createRng } from '../generator/prng.js';
 import { applyTransition } from '../engine/exceptions.js';
 import { ms, iso, HOUR } from '../engine/time.js';
+import { recordPerf } from '../scripts/perfDoc.js';
 
 // A source offers forEach(table, cb). CSV sources stream; table sources iterate arrays.
 export const csvSource = (dir) => ({
@@ -103,6 +104,9 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   for (const [t, n] of Object.entries(r.counts)) if (n) console.log(`  ${t.padEnd(26)} ${String(n).padStart(9)}`);
   console.log(`workflow: ${r.workflow.progressed}/${r.workflow.exceptions} exceptions progressed (${r.workflow.events} events): ASSIGNED ${r.workflow.ASSIGNED}, INVESTIGATING ${r.workflow.INVESTIGATING}, RESOLVED ${r.workflow.RESOLVED}, ESCALATED ${r.workflow.ESCALATED}`);
   console.log(`loaded ${rows} rows in ${Math.round(r.load_ms)} ms (${Math.round(rows / (r.load_ms / 1000))} rows/s); total ${Math.round(r.total_ms)} ms; DB ${(statSync(path).size / 1048576).toFixed(1)} MB; foreign_key_check clean`);
+  recordPerf('db_build', { measured_at: new Date().toISOString().slice(0, 10), rows, load_ms: Math.round(r.load_ms), total_ms: Math.round(r.total_ms), rows_per_s: Math.round(rows / (r.load_ms / 1000)),
+    db_mb: Number((statSync(path).size / 1048576).toFixed(1)), peak_rss_mb: Math.round(process.resourceUsage().maxRSS / 1024),
+    workflow: `${r.workflow.progressed} of ${r.workflow.exceptions} engine exceptions progressed (ASSIGNED ${r.workflow.ASSIGNED}, INVESTIGATING ${r.workflow.INVESTIGATING}, RESOLVED ${r.workflow.RESOLVED}, ESCALATED ${r.workflow.ESCALATED}), every history row through applyTransition` });
   console.log(JSON.stringify({ step: 'db:build', elapsed_ms: Math.round(r.total_ms), rows, rows_per_s: Math.round(rows / (r.load_ms / 1000)), db_mb: Math.round(statSync(path).size / 1048576), peak_rss_mb: Math.round(process.resourceUsage().maxRSS / 1024) }));
 }
 void run;

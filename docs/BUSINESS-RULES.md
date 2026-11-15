@@ -67,6 +67,7 @@ Alternative if organisers clarify otherwise: rename IDs only; ID generation is c
 | custody event_type | PICKUP, HANDOVER, DELIVERY |
 | route stop_type | ORIGIN, TRANSIT, DESTINATION |
 | party_type | SUPPLIER, CARRIER, WAREHOUSE |
+| product category | VACCINE, BIOLOGIC, INSULIN, OTHER |
 | compliance_status | COMPLIANT, NON_COMPLIANT, INDETERMINATE |
 | finding_result | PASS, FAIL, INDETERMINATE, WARNING |
 | severity | LOW, MEDIUM, HIGH, CRITICAL |

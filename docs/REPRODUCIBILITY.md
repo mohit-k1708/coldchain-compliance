@@ -14,8 +14,8 @@ Manifests identical: true
 
 ## Timings
 
-- run 1: 21605 ms
-- run 2: 16810 ms
+- run 1: 16796 ms
+- run 2: 15580 ms
 
 ## Checksums (run 1 / run 2)
 

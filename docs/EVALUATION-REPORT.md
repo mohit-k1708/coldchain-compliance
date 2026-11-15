@@ -9,7 +9,7 @@
 
 ## Results: seed 20261022, 5000 shipments
 
-seed 20261022, 5000 shipments, 1000 loggers, mix `default`, generator 0.0.0.
+seed 20261022, 5000 shipments, 1000 loggers, mix `default`, generator 1.0.0.
 
 ### Confusion matrix (rows = expected, columns = actual), n = 5000
 
@@ -142,7 +142,7 @@ Every rule group hits its intended label and none is redundant.
 
 ## Holdout: seed 777 holdout (different seed and label mix)
 
-seed 777, 2000 shipments, 400 loggers, mix `holdout`, generator 0.0.0.
+seed 777, 2000 shipments, 400 loggers, mix `holdout`, generator 1.0.0.
 
 ### Confusion matrix (rows = expected, columns = actual), n = 2000
 

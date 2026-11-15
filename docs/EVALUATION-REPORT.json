@@ -1,7 +1,7 @@
 {
   "primary": {
     "name": "seed 20261022, 5000 shipments",
-    "description": "seed 20261022, 5000 shipments, 1000 loggers, mix `default`, generator 0.0.0.",
+    "description": "seed 20261022, 5000 shipments, 1000 loggers, mix `default`, generator 1.0.0.",
     "metrics": {
       "n": 5000,
       "confusion": {
@@ -644,7 +644,7 @@
   ],
   "holdout": {
     "name": "seed 777 holdout (different seed and label mix)",
-    "description": "seed 777, 2000 shipments, 400 loggers, mix `holdout`, generator 0.0.0.",
+    "description": "seed 777, 2000 shipments, 400 loggers, mix `holdout`, generator 1.0.0.",
     "metrics": {
       "n": 2000,
       "confusion": {

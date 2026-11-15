@@ -6,7 +6,7 @@ import { buildReport, renderMarkdown } from '../engine/report.js';
 import { readTruth } from '../evaluation/cli.js';
 
 const dir = resolve('data/sample'), outDir = resolve('docs/examples');
-const LABELS = ['TEMPERATURE_EXCURSION', 'LOGGER_NOT_ASSIGNED', 'POLICY_MISMATCH', 'MISSING_DATA_SILENTLY_PASSED', 'CUSTODY_GAP', 'CROSS_SHIPMENT_EXCURSION', 'ROUTE_DEVIATION', 'NONE'];
+const LABELS = ['TEMPERATURE_EXCURSION', 'LOGGER_NOT_ASSIGNED', 'POLICY_MISMATCH', 'MISSING_DATA_SILENTLY_PASSED', 'CUSTODY_GAP', 'CROSS_SHIPMENT_EXCURSION', 'ROUTE_DEVIATION', 'NONE', 'EXCURSION_WITHIN_ALLOWANCE', 'BOUNDARY_AT_LIMIT', 'CALIBRATION_MARGINAL', 'CALIBRATION_EXPIRED', 'MISSING_DATA'];
 const { tables, readingStore } = loadForReport(dir);
 const truth = readTruth(resolve(dir, 'ground_truth.csv'));
 mkdirSync(outDir, { recursive: true });

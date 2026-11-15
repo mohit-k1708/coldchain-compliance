@@ -1,7 +1,12 @@
 {
   "name": "coldchain-compliance",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Synthetic cold-chain shipment compliance system: seeded data generator, rule-based compliance engine, evaluation against ground truth, SQLite database, REST API and React UI.",
+  "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
   "scripts": {
     "test": "node --test \"tests/**/*.test.js\"",
     "generate": "node generator/index.js",
@@ -22,7 +27,10 @@
     "bench:api": "node scripts/apiBench.js",
     "client:install": "npm --prefix client install",
     "client:dev": "npm --prefix client run dev",
-    "client:build": "npm --prefix client run build"
+    "client:build": "npm --prefix client run build",
+    "verify": "node scripts/verify.js",
+    "docs:edgecases": "node scripts/edgeCases.js",
+    "docs:perf": "node scripts/perfDoc.js"
   },
   "dependencies": {
     "express": "^5.3.0"

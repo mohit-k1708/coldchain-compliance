@@ -2,6 +2,7 @@
 import { resolve } from 'node:path';
 import { createApp } from '../server/app.js';
 import { openDb, all, get } from '../server/db.js';
+import { recordPerf } from './perfDoc.js';
 
 const dbPath = resolve(process.env.DB_PATH ?? 'data/app.db');
 const db = openDb(dbPath);
@@ -19,6 +20,7 @@ for (const [name, path] of endpoints) {
   for (let i = 0; i < 3; i++) { const t = performance.now(); const r = await fetch(base + path); await r.text(); if (!r.ok) throw new Error(`${path} -> ${r.status}`); ms.push(Math.round((performance.now() - t) * 10) / 10); }
   rows.push([name, ...ms]);
 }
+const plansOut = {};
 console.log('| endpoint | run 1 (ms) | run 2 (ms) | run 3 (ms) |\n|---|---:|---:|---:|');
 for (const r of rows) console.log(`| ${r.join(' | ')} |`);
 const plans = {
@@ -30,6 +32,8 @@ const plans = {
 };
 for (const [name, [sql]] of Object.entries(plans)) {
   console.log(`\nEXPLAIN QUERY PLAN ${name}:`);
-  for (const p of all(db, `EXPLAIN QUERY PLAN ${sql}`)) console.log('  ', p.detail);
+  plansOut[name] = all(db, `EXPLAIN QUERY PLAN ${sql}`).map((p) => p.detail);
+  for (const p of plansOut[name]) console.log('  ', p);
 }
+recordPerf('api', { measured_at: new Date().toISOString().slice(0, 10), runs: 3, rows: rows.map(([name, ...ms]) => ({ name, ms })), plans: plansOut });
 server.close();

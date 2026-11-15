@@ -3,7 +3,7 @@
   "shipments": 100,
   "loggers": 20,
   "mix": "default",
-  "generator_version": "0.0.0",
+  "generator_version": "1.0.0",
   "files": {
     "party.csv": {
       "rows": 15,
