@@ -27,7 +27,17 @@ All IDs are immutable, zero-padded and referenced identically in every file.
 | Party | `PTY-NNNNNN` | PTY-000001 | assumption |
 | Compliance run | `RUN-2026-NNNNNN` | RUN-2026-000001 | assumption |
 
-Timestamps in IDs: UTC, `YYYYMMDDThhmmssZ` reduced to `YYYYMMDDThhmmZ` (readings are on 10-minute marks).
+Timestamps in IDs: UTC, `YYYYMMDDThhmmssZ` (e.g. `101000Z` = 10:10:00; readings are on 10-minute marks).
+
+Additional ID formats chosen by the generator (not in the statement):
+
+| Entity | Format | Example |
+|---|---|---|
+| Logger calibration | `CAL-NNNNNN` | CAL-000001 |
+| Shipment status history | `HST-2026-NNNNNN` | HST-2026-000001 |
+| Legacy report | `LEG-2026-NNNNNN` | LEG-2026-000001 |
+
+Per-shipment child IDs (route stop, custody, history, excursion) are derived from the shipment number (`(n-1)*10 + i`), so one shipment's IDs never depend on another shipment's content.
 
 ### A-01 Logger identity (the biggest ambiguity)
 The statement asks for **1,000 loggers** *and* the ID pattern `LOG-<shipment-id>-01` (which embeds a shipment).
@@ -173,7 +183,7 @@ Every transition inserts a row in `exception_event`; `excursion_report.status` i
 | issue_type (label) | Expected status | Expected rule / detection |
 |---|---|---|
 | NONE | COMPLIANT | all rules pass |
-| BOUNDARY_AT_LIMIT | COMPLIANT | reading exactly at limit |
+| BOUNDARY_AT_LIMIT | COMPLIANT | readings exactly at the edge of the IN band (max-u or min+u) |
 | EXCURSION_WITHIN_ALLOWANCE | COMPLIANT | excursion report created, duration <= allowed |
 | TEMPERATURE_EXCURSION | NON_COMPLIANT | R-TEMP-03 |
 | CALIBRATION_MARGINAL | INDETERMINATE | R-TEMP-04 |
@@ -185,6 +195,8 @@ Every transition inserts a row in `exception_event`; `excursion_report.status` i
 | CUSTODY_GAP | INDETERMINATE | R-CUS-01 |
 | CROSS_SHIPMENT_EXCURSION | COMPLIANT (own readings fine) | R-ISO-01: legacy report flagged `CROSS_SHIPMENT_REPORT`; naive per-logger calc would wrongly say NON_COMPLIANT |
 | ROUTE_DEVIATION | NON_COMPLIANT | R-ROUTE-01..04 |
+
+`ground_truth.csv` columns: `shipment_id, issue_type, variant, expected_decision, expected_evidence_category (NONE|TEMPERATURE|DATA_GAP|LOGGER|CALIBRATION|POLICY|CUSTODY|ROUTE|ISOLATION), expected_rule, expected_excursion_minutes, expected_gap_minutes, related_shipment_id`. Blank where not applicable. `expected_excursion_minutes` = total OUT minutes (sample-and-hold, 10 min per OUT reading) for TEMPERATURE_EXCURSION and EXCURSION_WITHIN_ALLOWANCE; `expected_gap_minutes` = time between the two readings bracketing the deleted block. ROUTE variants map to rules: MISSING_STOP R-ROUTE-01, UNEXPECTED_STOP R-ROUTE-02, SEQUENCE R-ROUTE-03, EXCESS_DWELL R-ROUTE-04. CROSS_SHIPMENT_EXCURSION is a pair (variants FIRST/SECOND) linked through `related_shipment_id`.
 
 Labels are produced by the injector from the *injection it performed*, not by calling engine code (avoids circular 100% metrics). Multi-label shipments are avoided in v1 so each shipment has exactly one label.
 

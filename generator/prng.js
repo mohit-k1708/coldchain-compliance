@@ -18,3 +18,16 @@ export function createRng(seed) {
   };
   return { next, int, pick, chance, normal };
 }
+
+// Stable 32-bit seed from any parts (FNV-1a + avalanche). Used for per-shipment RNG streams.
+export function deriveSeed(...parts) {
+  let h = 2166136261 >>> 0;
+  for (const p of parts) {
+    const s = String(p) + '|';
+    for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+  }
+  h ^= h >>> 16; h = Math.imul(h, 0x85ebca6b) >>> 0;
+  h ^= h >>> 13; h = Math.imul(h, 0xc2b2ae35) >>> 0;
+  return (h ^ (h >>> 16)) >>> 0;
+}
+export const deriveRng = (...parts) => createRng(deriveSeed(...parts));

@@ -51,24 +51,30 @@ export function generateMasterData(rng, { loggers }) {
 
   const logger = [], logger_calibration = [];
   const calStart = parse('2026-01-01');
+  const lapsedCount = Math.min(loggers - 1, Math.max(2, Math.round(0.03 * loggers)));
   for (let i = 1; i <= loggers; i++) {
-    const on = calStart + rng.int(0, 89) * DAY; // 2026-01-01 .. 2026-03-31
-    const exp = addYears(on, 1);
+    const lapsed = i > loggers - lapsedCount; // last ids are "lapsed" loggers
+    // Normal loggers are calibrated 2026-01-01..14 so they are valid for every departure (>= Jan 15).
+    const on = lapsed ? parse('2025-02-01') : calStart + rng.int(0, 13) * DAY;
+    const exp = lapsed ? parse('2026-02-01') : addYears(on, 1);
     const unc = rng.int(20, 50) / 100;
     const logger_id = ids.loggerId(i);
     logger_calibration.push({ calibration_id: ids.calibrationId(i), logger_id, calibrated_on: ymd(on),
       expires_on: ymd(exp), uncertainty_c: unc });
     logger.push({ logger_id, device_serial_number: `SN-${100000 + i}-${rng.int(1000, 9999)}`,
-      calibration_status: 'VALID', calibration_date: ymd(on), calibration_expiry: ymd(exp),
+      calibration_status: lapsed ? 'EXPIRED' : 'VALID', calibration_date: ymd(on), calibration_expiry: ymd(exp),
       calibration_uncertainty_c: unc, device_status: 'AVAILABLE' });
   }
 
-  const threshold_policy = product.map((p, i) => ({
-    policy_id: ids.policyId(i + 1), product_id: p.product_id, policy_version: 1,
-    min_temp_c: p.required_min_temp_c, max_temp_c: p.required_max_temp_c,
-    max_excursion_minutes: p.max_excursion_minutes, max_data_gap_minutes: 30, sampling_interval_minutes: 10,
-    max_dwell_minutes: 120, effective_from: T0, effective_to: null, policy_status: 'ACTIVE',
-  }));
+  const threshold_policy = [];
+  product.forEach((p, i) => {
+    const base = { product_id: p.product_id, min_temp_c: p.required_min_temp_c, max_temp_c: p.required_max_temp_c,
+      max_excursion_minutes: p.max_excursion_minutes, max_data_gap_minutes: 30, sampling_interval_minutes: 10 };
+    threshold_policy.push({ policy_id: ids.policyId(2 * i + 1), ...base, policy_version: 1, max_dwell_minutes: 120,
+      effective_from: T0, effective_to: '2026-09-01T00:00:00Z', policy_status: 'SUPERSEDED' });
+    threshold_policy.push({ policy_id: ids.policyId(2 * i + 2), ...base, policy_version: 2, max_dwell_minutes: 90,
+      effective_from: '2026-09-01T00:00:00Z', effective_to: null, policy_status: 'ACTIVE' });
+  });
 
   return { party, product, lot, packaging, logger, logger_calibration, threshold_policy };
 }

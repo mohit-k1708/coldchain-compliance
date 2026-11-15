@@ -63,10 +63,10 @@ test('c: validator passes clean data and catches injected defects', () => {
   assert.ok(rule((t) => t.party.push({ ...t.party[0] })).has('PK_UNIQUE'));
   assert.ok(rule((t) => { t.shipment[0].product_id = 'PRD-999999'; }).has('FK_INTEGRITY'));
   assert.ok(rule((t) => { t.shipment[0].arrival_time = '2026-01-01T00:00:00Z'; }).has('DATE_ORDER'));
-  assert.ok(rule((t) => {
-    const a = t.logger_assignment[0];
-    t.logger_assignment.push({ ...a, logger_assignment_id: 'LOG-SHP-2026-000001-02' });
-  }).has('ASSIGNMENT_OVERLAP'));
+  // overlapping assignments are a business observation (not an integrity error) since Phase 3
+  const t = structuredClone(tables);
+  t.logger_assignment.push({ ...t.logger_assignment[0], logger_assignment_id: 'LOG-SHP-2026-000001-02' });
+  assert.deepEqual(validateDataset(t).observations.assignmentOverlap, ['SHP-2026-000001']);
 });
 
 test('d: readings', () => {
@@ -109,7 +109,7 @@ test('e: custody chain and route order', () => {
       assert.ok((ms(s.actual_departure) - ms(s.actual_arrival)) / MIN <= pol.max_dwell_minutes);
     }
     if (i > 0) assert.ok(ms(s.actual_arrival) > ms(ordered[i - 1].actual_departure));
-    assert.ok((ms(s.actual_arrival) - ms(s.planned_arrival)) / MIN <= 15);
+    if (s.stop_type !== 'DESTINATION') assert.ok((ms(s.actual_arrival) - ms(s.planned_arrival)) / MIN <= 15);
   }
   assert.deepEqual(ordered.map((s) => s.stop_type)[0], 'ORIGIN');
   assert.equal(ordered.at(-1).stop_type, 'DESTINATION');

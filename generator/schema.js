@@ -10,7 +10,7 @@ export function parseSchema() {
   const re = /CREATE TABLE (\w+) \(\n([\s\S]*?)\n\);/g;
   let m;
   while ((m = re.exec(sql))) {
-    const t = { columns: [], pk: [], fks: [] };
+    const t = { columns: [], pk: [], fks: [], enums: {} };
     for (const raw of m[2].split('\n')) {
       const line = raw.trim().replace(/,$/, '');
       if (!line) continue;
@@ -22,6 +22,8 @@ export function parseSchema() {
       const type = c[2].startsWith('NUMERIC') ? 'NUMERIC' : c[2];
       t.columns.push({ name: c[1], type, scale: c[4] ? Number(c[4]) : null });
       if (/PRIMARY KEY/.test(c[5])) t.pk = [c[1]];
+      const en = c[5].match(/(\w+)\s+IN\s*\(([^)]*)\)/);
+      if (en) t.enums[en[1]] = en[2].split(',').map((x) => x.trim().replace(/^'|'$/g, ''));
       const fk = c[5].match(/REFERENCES\s+(\w+)\((\w+)\)/);
       if (fk) t.fks.push({ col: c[1], table: fk[1], refCol: fk[2] });
     }
